@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart Hyper-Personalized</title>
+  <style>
+    :root {
+      --bg: #06060a;
+      --neon-blue: #00e5ff;
+      --neon-pink: #ff00c8;
+      --text-glow: 0 0 10px rgba(0,229,255,.8), 0 0 20px rgba(255,0,200,.6);
+      --card-bg: rgba(0,0,0,0.6);
+      --tt: all .5s ease;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      background: var(--bg);
+      color:#fff;
+      font-family:'Segoe UI',sans-serif;
+      min-height:100vh;
+      overflow-y:auto;
+    }
+    .neon {
+      color:var(--neon-blue);
+      text-shadow:var(--text-glow);
+    }
+    .container {
+      position:absolute; top:0; left:0;
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column;
+      opacity:0; visibility:hidden;
+      transition:var(--tt);
+      overflow-y:auto;
+    }
+    .container.active {
+      opacity:1; visibility:visible;
+    }
+    .card {
+      background:var(--card-bg);
+      padding:2rem; border-radius:8px;
+      backdrop-filter:blur(8px);
+      text-align:center;
+      width:90%; max-width:400px;
+    }
+    input {
+      width:100%; padding:.5rem; margin-top:.5rem;
+      border:none; border-radius:4px;
+      background:rgba(255,255,255,0.1);
+      color:#fff; outline:none;
+      transition:var(--tt);
+    }
+    input:focus { background:rgba(255,255,255,0.2); }
+    .glow-btn {
+      background:var(--neon-pink);
+      border:none; padding:.75rem 2rem; margin-top:1rem;
+      font-size:1.1rem; cursor:pointer; color:#fff;
+      text-shadow:0 0 5px rgba(255,0,200,.7);
+      box-shadow:0 0 10px rgba(255,0,200,.5),
+                 inset 0 0 5px rgba(255,0,200,.7);
+      transition:var(--tt);
+    }
+    .glow-btn:hover {
+      box-shadow:0 0 20px rgba(255,0,200,1),
+                 inset 0 0 10px rgba(255,0,200,1);
+      transform:scale(1.05);
+    }
+    #heroImg {
+      margin-top:.5rem;
+      width:90%; max-height:50vh;
+      border:2px solid var(--neon-blue);
+      border-radius:4px;
+      box-shadow:0 0 10px var(--neon-blue);
+    }
+    /* force caption block and give room */
+    #caption {
+      display:block;
+      margin:1rem 0;
+      font-size:1.1rem;
+      color:var(--neon-blue);
+      text-shadow:var(--text-glow);
+      min-height:2em;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="welcome" class="container active">
+    <h1 class="neon">Walmart Hyper-Personalized</h1>
+    <p style="color:#ccc; margin-top:1rem;">Discover products curated just for you.</p>
+    <button id="getStarted" class="glow-btn">Get Started</button>
+  </div>
+
+  <div id="form" class="container">
+    <div class="card">
+      <h2 class="neon">Tell Us About You</h2>
+      <label>Region<input id="region" placeholder="e.g. North America"/></label>
+      <label>Medium<input id="medium" placeholder="e.g. PaidSocial"/></label>
+      <label>Category<input id="category" placeholder="e.g. Electronics"/></label>
+      <button id="generate" class="glow-btn">Generate Landing</button>
+    </div>
+  </div>
+
+  <div id="result" class="container">
+    <div class="card">
+      <h2 class="neon">Your Personalized Hero</h2>
+      <img id="heroImg" src="" alt="Hero Preview" />
+      <p id="caption">Loading caption…</p>
+      <button id="shopNow" class="glow-btn">Go to Shop</button>
+    </div>
+  </div>
+
+  <script>
+    const welcome = document.getElementById('welcome'),
+          form    = document.getElementById('form'),
+          result  = document.getElementById('result');
+
+    const regionIn   = document.getElementById('region'),
+          mediumIn   = document.getElementById('medium'),
+          categoryIn = document.getElementById('category'),
+          heroImg    = document.getElementById('heroImg'),
+          captionEl  = document.getElementById('caption'),
+          shopBtn    = document.getElementById('shopNow');
+
+    function show(screen){ [welcome,form,result].forEach(s=>s.classList.remove('active')); screen.classList.add('active'); }
+
+    document.getElementById('getStarted').onclick = ()=> show(form);
+
+    document.getElementById('generate').onclick = async ()=>{
+      const region   = regionIn.value.trim(),
+            medium   = mediumIn.value.trim(),
+            category = categoryIn.value.trim();
+      if(!region||!medium||!category) return alert('Please fill out all fields.');
+
+      captionEl.textContent = 'Generating…';
+      show(result);
+
+      try {
+        const res  = await fetch('/generate_landing', {
+          method: 'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({region,medium,category})
+        }),
+        json = await res.json();
+
+        console.log('API response:', json);
+        if(!res.ok) throw new Error(json.error);
+
+        heroImg.src         = `/images/${json.modules.hero}`;
+        captionEl.textContent = json.caption || 'No caption returned.';
+        shopBtn.onclick = ()=> window.location.href = `/static/${json.modules.hero.replace('.jpg','.html')}`;
+
+      } catch(err){
+        console.error(err);
+        captionEl.textContent = 'Uh oh, something went wrong.';
+      }
+    };
+  </script>
+</body>
+</html>
