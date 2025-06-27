@@ -2,7 +2,7 @@ Flask
 flask-cors
 pandas
 joblib
-scikit-learn
+scikit-learn==1.6.1
 google-generativeai
 python-dotenv
 gunicorn
