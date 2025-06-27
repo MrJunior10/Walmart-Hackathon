@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Walmart Hyper-Personalized</title>
+
+  <!-- Google Analytics: replace with your GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V0FV8Q991V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V0FV8Q991V');
+  </script>
+
   <style>
     :root {
       --bg: #06060a;
@@ -16,17 +26,17 @@
     * { box-sizing:border-box; margin:0; padding:0; }
     body {
       background: var(--bg);
-      color:#fff;
-      font-family:'Segoe UI',sans-serif;
-      min-height:100vh;
-      overflow-y:auto;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      overflow-y: auto;
     }
     .neon {
-      color:var(--neon-blue);
-      text-shadow:var(--text-glow);
+      color: var(--neon-blue);
+      text-shadow: var(--text-glow);
     }
     .container {
-      position:absolute; top:0; left:0;
+      position: absolute; top:0; left:0;
       width:100%; height:100%;
       display:flex; align-items:center; justify-content:center;
       flex-direction:column;
@@ -38,9 +48,9 @@
       opacity:1; visibility:visible;
     }
     .card {
-      background:var(--card-bg);
+      background: var(--card-bg);
       padding:2rem; border-radius:8px;
-      backdrop-filter:blur(8px);
+      backdrop-filter: blur(8px);
       text-align:center;
       width:90%; max-width:400px;
     }
@@ -53,7 +63,7 @@
     }
     input:focus { background:rgba(255,255,255,0.2); }
     .glow-btn {
-      background:var(--neon-pink);
+      background: var(--neon-pink);
       border:none; padding:.75rem 2rem; margin-top:1rem;
       font-size:1.1rem; cursor:pointer; color:#fff;
       text-shadow:0 0 5px rgba(255,0,200,.7);
@@ -73,7 +83,6 @@
       border-radius:4px;
       box-shadow:0 0 10px var(--neon-blue);
     }
-    /* force caption block and give room */
     #caption {
       display:block;
       margin:1rem 0;
@@ -88,16 +97,24 @@
 
   <div id="welcome" class="container active">
     <h1 class="neon">Walmart Hyper-Personalized</h1>
-    <p style="color:#ccc; margin-top:1rem;">Discover products curated just for you.</p>
+    <p style="color:#ccc; margin-top:1rem;">
+      Discover products curated just for you.
+    </p>
     <button id="getStarted" class="glow-btn">Get Started</button>
   </div>
 
   <div id="form" class="container">
     <div class="card">
       <h2 class="neon">Tell Us About You</h2>
-      <label>Region<input id="region" placeholder="e.g. North America"/></label>
-      <label>Medium<input id="medium" placeholder="e.g. PaidSocial"/></label>
-      <label>Category<input id="category" placeholder="e.g. Electronics"/></label>
+      <label>Region
+        <input id="region" placeholder="Will auto-fill via IP" />
+      </label>
+      <label>Medium
+        <input id="medium" placeholder="e.g. PaidSocial" />
+      </label>
+      <label>Category
+        <input id="category" placeholder="e.g. Electronics" />
+      </label>
       <button id="generate" class="glow-btn">Generate Landing</button>
     </div>
   </div>
@@ -123,7 +140,18 @@
           captionEl  = document.getElementById('caption'),
           shopBtn    = document.getElementById('shopNow');
 
-    function show(screen){ [welcome,form,result].forEach(s=>s.classList.remove('active')); screen.classList.add('active'); }
+    function show(screen){
+      [welcome,form,result].forEach(s=>s.classList.remove('active'));
+      screen.classList.add('active');
+    }
+
+    // IP-based autofill
+    fetch('https://ipapi.co/json/')
+      .then(res=>res.json())
+      .then(data=>{
+        if (data.region) regionIn.value = data.region;
+      })
+      .catch(()=>{/* ignore */});
 
     document.getElementById('getStarted').onclick = ()=> show(form);
 
@@ -131,29 +159,30 @@
       const region   = regionIn.value.trim(),
             medium   = mediumIn.value.trim(),
             category = categoryIn.value.trim();
-      if(!region||!medium||!category) return alert('Please fill out all fields.');
+      if (!region || !medium || !category) {
+        return alert('Please fill out all fields.');
+      }
 
       captionEl.textContent = 'Generating…';
       show(result);
 
       try {
         const res  = await fetch('/generate_landing', {
-          method: 'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({region,medium,category})
-        }),
-        json = await res.json();
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({region,medium,category})
+              }),
+              json = await res.json();
 
-        console.log('API response:', json);
-        if(!res.ok) throw new Error(json.error);
+        if (!res.ok) throw new Error(json.error);
 
-        heroImg.src         = `/images/${json.modules.hero}`;
-        captionEl.textContent = json.caption || 'No caption returned.';
-        shopBtn.onclick = ()=> window.location.href = `/static/${json.modules.hero.replace('.jpg','.html')}`;
+        heroImg.src           = `/images/${json.modules.hero}`;
+        captionEl.textContent = json.caption || 'No caption.';
+        shopBtn.onclick       = ()=> window.location.href = `/static/${json.modules.hero.replace('.jpg','.html')}`;
 
-      } catch(err){
+      } catch(err) {
         console.error(err);
-        captionEl.textContent = 'Uh oh, something went wrong.';
+        captionEl.textContent = 'Something went wrong.';
       }
     };
   </script>

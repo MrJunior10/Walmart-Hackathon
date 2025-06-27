@@ -1,5 +1,7 @@
 import os
+import csv
 import logging
+from datetime import datetime
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -8,7 +10,7 @@ import pandas as pd
 import google.generativeai as genai
 
 # === HARD-CODE YOUR GEMINI API KEY HERE ===
-genai.configure(api_key="ahahahahaha")
+genai.configure(api_key="lmao")
 # ==========================================
 
 # Configure logging
@@ -24,6 +26,18 @@ def get_model_path():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(base_dir, "models", "landing_page_recommender.pkl")
 
+# Path for feedback CSV
+base_dir = os.path.dirname(os.path.abspath(__file__))
+logs_dir = os.path.join(base_dir, "logs")
+os.makedirs(logs_dir, exist_ok=True)
+FEEDBACK_CSV = os.path.join(logs_dir, "user_feedback.csv")
+FEEDBACK_FIELDS = ["timestamp", "region", "medium", "category", "cluster", "hero", "carousel", "cta", "caption"]
+
+# Ensure CSV has header
+if not os.path.isfile(FEEDBACK_CSV):
+    with open(FEEDBACK_CSV, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FEEDBACK_FIELDS)
+        writer.writeheader()
 
 # Load ML pipeline on startup
 configure_logging()
@@ -35,7 +49,6 @@ logging.info("Model loaded successfully.")
 # Flask setup
 app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)
-
 
 # ——— Gemini Caption Generator ———
 def generate_caption(region, medium, category, cluster):
@@ -52,6 +65,22 @@ def generate_caption(region, medium, category, cluster):
         logging.warning(f"Gemini caption failed: {e}")
         return "Welcome to your personalized shopping experience!"
 
+# ——— Log feedback to CSV ———
+def log_feedback(region, medium, category, cluster, modules, caption):
+    row = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "region": region,
+        "medium": medium,
+        "category": category,
+        "cluster": cluster,
+        "hero": modules.get("hero", ""),
+        "carousel": modules.get("carousel", ""),
+        "cta": modules.get("cta", ""),
+        "caption": caption.replace("\n", " ")
+    }
+    with open(FEEDBACK_CSV, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FEEDBACK_FIELDS)
+        writer.writerow(row)
 
 # ——— Recommendation Endpoint ———
 @app.route("/generate_landing", methods=["POST"])
@@ -86,6 +115,13 @@ def generate_landing():
             data["region"], data["medium"], data["category"], cluster_pred
         )
 
+        # 4) Log inputs and output
+        log_feedback(
+            data["region"], data["medium"], data["category"],
+            cluster_pred, modules, caption
+        )
+
+        # 5) Return JSON
         return jsonify({
             "cluster": cluster_pred,
             "modules": modules,
@@ -96,12 +132,10 @@ def generate_landing():
         logging.exception("Error in /generate_landing")
         return jsonify({"error": str(e)}), 500
 
-
 # Serve your neon-lit SPA
 @app.route("/")
 def index():
     return app.send_static_file("index.html")
-
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
