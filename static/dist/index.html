@@ -178,7 +178,7 @@
 
         heroImg.src           = `/images/${json.modules.hero}`;
         captionEl.textContent = json.caption || 'No caption.';
-        shopBtn.onclick       = ()=> window.location.href = `/static/${json.modules.hero.replace('.jpg','.html')}`;
+        shopBtn.onclick       = ()=> window.location.href = `/${json.modules.hero.replace('.jpg','')}`;
 
       } catch(err) {
         console.error(err);
