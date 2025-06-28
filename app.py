@@ -31,11 +31,13 @@ def get_model_path():
 
 # Google Sheets Helper
 def get_gsheet_client():
-    scope = ["https://www.googleapis.com/auth/spreadsheets"]
-    import json
-    creds_dict = json.loads(os.getenv("GSHEET_CREDS"))
-    creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"  # ← REQUIRED!
+    ]
+    creds = Credentials.from_service_account_file("service_account.json", scopes=scope)
     return gspread.authorize(creds)
+
 
 def log_to_gsheet(region, medium, category, cluster, modules, caption):
     try:
