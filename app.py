@@ -1,8 +1,6 @@
-from datetime import datetime
 import os
-import csv
 import logging
-
+from datetime import datetime
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import joblib
@@ -26,12 +24,12 @@ def configure_logging():
         handlers=[logging.StreamHandler()]
     )
 
-# Get model path
+# Load ML model
 def get_model_path():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(base_dir, "models", "landing_page_recommender.pkl")
 
-# === Google Sheets Helper ===
+# Google Sheets Helper
 def get_gsheet_client():
     scope = ["https://www.googleapis.com/auth/spreadsheets"]
     creds = Credentials.from_service_account_file("service_account.json", scopes=scope)
@@ -40,55 +38,27 @@ def get_gsheet_client():
 def log_to_gsheet(region, medium, category, cluster, modules, caption):
     try:
         client = get_gsheet_client()
-        sheet = client.open("Walmart Feedback Log").sheet1  # Ensure you’ve created this sheet
+        sheet = client.open("Walmart Feedback Log").sheet1
         sheet.append_row([
             datetime.utcnow().isoformat(),
             region, medium, category, cluster,
             modules["hero"], modules["carousel"], modules["cta"], caption
         ])
+        logging.info("Logged to Google Sheet successfully.")
     except Exception as e:
         logging.warning(f"Google Sheets logging failed: {e}")
 
-# CSV log fallback
-base_dir = os.path.dirname(os.path.abspath(__file__))
-logs_dir = os.path.join(base_dir, "logs")
-os.makedirs(logs_dir, exist_ok=True)
-FEEDBACK_CSV = os.path.join(logs_dir, "user_feedback.csv")
-FEEDBACK_FIELDS = ["timestamp", "region", "medium", "category", "cluster", "hero", "carousel", "cta", "caption"]
-
-if not os.path.isfile(FEEDBACK_CSV):
-    with open(FEEDBACK_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FEEDBACK_FIELDS)
-        writer.writeheader()
-
-def log_feedback(region, medium, category, cluster, modules, caption):
-    row = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "region": region,
-        "medium": medium,
-        "category": category,
-        "cluster": cluster,
-        "hero": modules.get("hero", ""),
-        "carousel": modules.get("carousel", ""),
-        "cta": modules.get("cta", ""),
-        "caption": caption.replace("\n", " ")
-    }
-    with open(FEEDBACK_CSV, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FEEDBACK_FIELDS)
-        writer.writerow(row)
-
-# Load model
+# Initialize app
 configure_logging()
 model_path = get_model_path()
 logging.info(f"Loading model from {model_path}…")
 pipeline = joblib.load(model_path)
 logging.info("Model loaded successfully.")
 
-# Flask setup
 app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)
 
-# Gemini caption
+# Caption generator
 def generate_caption(region, medium, category, cluster):
     prompt = (
         f"You are a personalization assistant for Walmart. A user from '{region}' "
@@ -103,7 +73,6 @@ def generate_caption(region, medium, category, cluster):
         logging.warning(f"Gemini caption failed: {e}")
         return "Welcome to your personalized shopping experience!"
 
-# Main logic
 @app.route("/generate_landing", methods=["POST"])
 def generate_landing():
     try:
@@ -130,7 +99,6 @@ def generate_landing():
         modules = module_map.get(cluster_pred, module_map[0])
         caption = generate_caption(data["region"], data["medium"], data["category"], cluster_pred)
 
-        log_feedback(data["region"], data["medium"], data["category"], cluster_pred, modules, caption)
         log_to_gsheet(data["region"], data["medium"], data["category"], cluster_pred, modules, caption)
 
         return jsonify({
@@ -143,6 +111,7 @@ def generate_landing():
         logging.exception("Error in /generate_landing")
         return jsonify({"error": str(e)}), 500
 
+# HTML Routes
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -171,3 +140,4 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     logging.info(f"Starting Flask app on port {port}…")
     app.run(host="0.0.0.0", port=port, debug=False)
+
