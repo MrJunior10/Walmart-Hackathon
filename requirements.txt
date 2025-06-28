@@ -7,3 +7,5 @@ google-generativeai
 python-dotenv
 gunicorn
 lightgbm
+gspread
+google-auth
