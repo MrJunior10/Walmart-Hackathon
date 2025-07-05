@@ -54,26 +54,41 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
+      padding: 0 1rem;
+      flex-wrap: wrap;
     }
 
     .logo {
-      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 2rem;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 2em;
       font-weight: bold;
       color: var(--walmart-yellow);
-      text-decoration: none;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .nav-links a {
       color: white;
       text-decoration: none;
       transition: var(--transition);
+      font-size: 1rem;
     }
 
     .nav-links a:hover {
@@ -82,8 +97,8 @@
 
     .search-bar {
       flex: 1;
-      max-width: 500px;
-      margin: 0 2rem;
+      max-width: 400px;
+      margin: 0 1.5rem;
       position: relative;
     }
 
@@ -116,29 +131,21 @@
       border-radius: 50%;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1.2rem;
     }
 
     .container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      min-height: 100vh;
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--transition);
-      padding-top: 5rem;
-    }
-
-    .container.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .welcome-content {
+      display: none;
       max-width: 1200px;
       margin: 0 auto;
       padding: 4rem 2rem;
+    }
+
+    .container.active {
+      display: block;
+    }
+
+    .welcome-content, .form-content, .result-content {
       text-align: center;
     }
 
@@ -157,6 +164,11 @@
       color: var(--walmart-yellow);
     }
 
+    .hero-banner p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
     .cta-button {
       background: var(--walmart-yellow);
       color: var(--walmart-dark);
@@ -170,13 +182,7 @@
       box-shadow: var(--shadow);
     }
 
-    .form-content {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .form-card {
+    .form-card, .result-card {
       background: white;
       padding: 3rem;
       border-radius: 20px;
@@ -186,6 +192,7 @@
 
     .form-group {
       margin-bottom: 1.5rem;
+      text-align: left;
     }
 
     .form-group label {
@@ -204,21 +211,6 @@
       transition: var(--transition);
     }
 
-    .result-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .result-card {
-      background: white;
-      padding: 3rem;
-      border-radius: 20px;
-      box-shadow: var(--shadow-lg);
-      text-align: center;
-      border: 1px solid var(--border-color);
-    }
-
     .hero-image {
       width: 100%;
       max-width: 500px;
@@ -226,7 +218,7 @@
       object-fit: cover;
       border-radius: 15px;
       box-shadow: var(--shadow);
-      margin: 1rem 0;
+      margin: 1rem auto;
     }
 
     .product-caption {
@@ -277,14 +269,34 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .search-bar {
+        width: 100%;
+        margin: 1rem 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-      <a href="#" class="logo">Walmart</a>
+      <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg" alt="Walmart Logo">
+        <span class="logo-text">Walmart</span>
+      </div>
       <ul class="nav-links">
         <li><a href="#">Departments</a></li>
         <li><a href="#">Services</a></li>

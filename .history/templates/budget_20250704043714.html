@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Walmart Premium Selection - Luxury Collection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walmart Unbeatable Deals - Budget Savings</title>
   <style>
     * {
       margin: 0;
@@ -13,13 +13,14 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-      color: #d4af37;
+      background: #f8f9fa;
+      transition: all 0.3s ease;
     }
 
+    /* Header Styles */
     header {
-      background: linear-gradient(135deg, #000000, #1a1a1a);
-      border-bottom: 2px solid #d4af37;
+      background: #28a745;
+      color: white;
       padding: 15px 0;
       position: sticky;
       top: 0;
@@ -42,15 +43,15 @@
     }
 
     .logo-container img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
+      height: 50px;
+      width: auto;
+      border-radius: 6px;
     }
 
     .logo-text {
       font-size: 1.8em;
       font-weight: bold;
-      color: #d4af37;
+      color: #ffc107;
     }
 
     .search-bar {
@@ -63,17 +64,16 @@
     .search-bar input {
       width: 100%;
       padding: 12px 50px 12px 20px;
-      border: 2px solid #d4af37;
+      border: none;
       border-radius: 25px;
       font-size: 16px;
       outline: none;
-      background: rgba(26, 26, 26, 0.8);
-      color: #d4af37;
+      background: white;
+      color: #333;
     }
 
     .search-bar input::placeholder {
-      color: #d4af37;
-      opacity: 0.7;
+      color: #666;
     }
 
     .search-btn {
@@ -81,8 +81,8 @@
       right: 5px;
       top: 50%;
       transform: translateY(-50%);
-      background: #d4af37;
-      color: #000000;
+      background: #ffc107;
+      color: #000;
       border: none;
       border-radius: 50%;
       width: 40px;
@@ -96,8 +96,8 @@
 
     .sign-in-btn {
       background: transparent;
-      color: #d4af37;
-      border: 2px solid #d4af37;
+      color: white;
+      border: 2px solid white;
       padding: 10px 20px;
       border-radius: 25px;
       cursor: pointer;
@@ -106,10 +106,11 @@
     }
 
     .sign-in-btn:hover {
-      background: #d4af37;
-      color: #000000;
+      background: white;
+      color: #28a745;
     }
 
+    /* Main Content */
     main {
       max-width: 1200px;
       margin: 0 auto;
@@ -117,17 +118,19 @@
     }
 
     .hero-section {
-      background: linear-gradient(135deg, #000000, #1a1a1a);
-      color: #d4af37;
-      border: 2px solid #d4af37;
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
       margin-bottom: 40px;
       border-radius: 15px;
       overflow: hidden;
+      position: relative;
     }
 
     .hero-content {
       padding: 60px 40px;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-title {
@@ -143,7 +146,7 @@
     }
 
     .cta-button {
-      background: #d4af37;
+      background: #ffc107;
       color: #000000;
       padding: 15px 40px;
       border: none;
@@ -158,72 +161,61 @@
 
     .cta-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
     }
 
+    /* Product Sections */
     .section-title {
       font-size: 2.5em;
       margin-bottom: 30px;
       text-align: center;
       font-weight: bold;
-    }
-
-    .category-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .category-tab {
-      background: transparent;
-      color: #d4af37;
-      border: 1px solid #d4af37;
-      padding: 12px 25px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .category-tab.active {
-      background: #d4af37;
-      color: #000000;
-      transform: scale(1.05);
-    }
-
-    .category-tab:hover {
-      background: #d4af37;
-      color: #000000;
+      color: #28a745;
     }
 
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
+      margin-bottom: 50px;
     }
 
     .product-card {
-      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-      border: 1px solid #d4af37;
+      background: white;
+      border: 2px solid #28a745;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.1);
       border-radius: 15px;
       overflow: hidden;
       transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-card::after {
+      content: "💰 BEST VALUE";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #28a745;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 0.7em;
+      font-weight: bold;
+      z-index: 10;
     }
 
     .product-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 15px 35px rgba(40, 167, 69, 0.2);
     }
 
     .product-image {
       width: 100%;
       height: 200px;
-      background-size: contain;
-      background-repeat: no-repeat;
+      background-size: cover;
       background-position: center;
-      background-color: #1a1a1a;
+      position: relative;
     }
 
     .product-info {
@@ -234,19 +226,19 @@
       font-size: 1.3em;
       font-weight: bold;
       margin-bottom: 10px;
-      color: #d4af37;
+      color: #333;
     }
 
     .product-price {
       font-size: 1.5em;
       font-weight: bold;
       margin-bottom: 15px;
-      color: #ffd700;
+      color: #28a745;
     }
 
     .product-btn {
-      background: linear-gradient(135deg, #d4af37, #ffd700);
-      color: #000000;
+      background: #28a745;
+      color: white;
       width: 100%;
       padding: 12px;
       border: none;
@@ -258,7 +250,38 @@
 
     .product-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    /* Category Tabs */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-tab {
+      background: #e9ecef;
+      color: #28a745;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-tab.active {
+      background: #28a745;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .category-tab:hover {
+      background: #28a745;
+      color: white;
     }
 
     @media (max-width: 768px) {
@@ -294,7 +317,7 @@
         <span class="logo-text">Walmart</span>
       </div>
       <div class="search-bar">
-        <input type="text" placeholder="Search premium products and luxury items">
+        <input type="text" placeholder="Search budget deals and everyday essentials">
         <button class="search-btn">🔍</button>
       </div>
       <button class="sign-in-btn">Sign In</button>
@@ -304,14 +327,14 @@
   <main>
     <section class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title">👑 Premium Selection</h1>
-        <p class="hero-subtitle">Curated luxury items for discerning customers</p>
-        <button class="cta-button">Shop Premium</button>
+        <h1 class="hero-title">💰 Unbeatable Deals</h1>
+        <p class="hero-subtitle">Maximum savings on everyday essentials</p>
+        <button class="cta-button">Save Now</button>
       </div>
     </section>
 
     <section>
-      <h2 class="section-title">Premium Collection</h2>
+      <h2 class="section-title">Best Value Picks</h2>
       <div class="category-tabs">
         <button class="category-tab active" onclick="filterProducts('all')">All</button>
         <button class="category-tab" onclick="filterProducts('electronics')">Electronics</button>
@@ -325,57 +348,27 @@
 
   <script>
     const products = [
-      {
-        id: 1,
-        title: "Samsung 75\" 8K QLED TV",
-        price: "$2,499.99",
-        category: "electronics",
-        image: "https://images.samsung.com/is/image/samsung/p6pim/in/qa98qn990ckxxl/gallery/in-qled-98qn990c-qa98qn990ckxxl-538370616?$684_547_PNG$"
-      },
-      {
-        id: 2,
-        title: "iPhone 15 Pro Max 1TB",
-        price: "$1,599.99",
-        category: "electronics",
-        image: "https://i.ytimg.com/vi/jnCnbEUzLsY/maxresdefault.jpg"
-      },
-      {
-        id: 3,
-        title: "Luxury Designer Sneakers",
-        price: "$899.99",
-        category: "fashion",
-        image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRJmqA-YENzHE5mGQGnte3oxembvdI8U3JLW4yS7igcGemcXIbQBHoZSggLaytSqWztTFvKBM58vSD9NvJ_iN6JoYAA7bb8yzLjZav5ThrV_-tPxc0lYegM2yc"
-      },
-      {
-        id: 4,
-        title: "Chef's Premium Kitchen Set",
-        price: "$1,299.99",
-        category: "home",
-        image: "https://www.unikitout.com/cdn/shop/products/Kitchen-Premium_Cream-Mix_1836x1836.jpg?v=1690237958"
-      },
-      {
-        id: 5,
-        title: "Premium Aged Wine Collection",
-        price: "$499.99",
-        category: "groceries",
-        image: "https://mscwordpresscontent.s3.amazonaws.com/mwmag/wp-content/uploads/2022/12/Premium7_MW1122-720x538.jpg"
-      }
+      { id: 1, title: '32" HD Smart TV - Great Value', price: '$149.99', category: 'electronics', image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+      { id: 2, title: 'Budget Smartphone - Unlocked', price: '$89.99', category: 'electronics', image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
+      { id: 3, title: 'Essential Basics T-Shirt Pack', price: '$12.99', category: 'fashion', image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' },
+      { id: 4, title: 'Basic Kitchen Essentials Set', price: '$39.99', category: 'home', image: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' },
+      { id: 5, title: 'Family Size Cereal - 3 Pack', price: '$8.99', category: 'groceries', image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)' },
+      { id: 6, title: 'Wired Headphones - Value Pack', price: '$19.99', category: 'electronics', image: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)' },
+      { id: 7, title: 'Everyday Jeans - Great Fit', price: '$24.99', category: 'fashion', image: 'linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)' },
+      { id: 8, title: 'Basic Garden Tool Set', price: '$29.99', category: 'home', image: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)' }
     ];
 
     let currentCategory = 'all';
 
     function renderProducts() {
       const grid = document.getElementById('products-grid');
-      const filteredProducts = currentCategory === 'all'
-        ? products
-        : products.filter(product => product.category === currentCategory);
-
-      grid.innerHTML = filteredProducts.map(product => `
+      const filtered = currentCategory === 'all' ? products : products.filter(p => p.category === currentCategory);
+      grid.innerHTML = filtered.map(p => `
         <div class="product-card">
-          <div class="product-image" style="background-image: url('${product.image}')"></div>
+          <div class="product-image" style="background: ${p.image}"></div>
           <div class="product-info">
-            <h3 class="product-title">${product.title}</h3>
-            <p class="product-price">${product.price}</p>
+            <h3 class="product-title">${p.title}</h3>
+            <p class="product-price">${p.price}</p>
             <button class="product-btn">Add to Cart</button>
           </div>
         </div>

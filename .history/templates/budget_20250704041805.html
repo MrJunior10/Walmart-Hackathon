@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart Budget Deals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #e6f9ed, #ffffff);
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      color: white;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 20px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border-radius: 25px;
+      border: none;
+      font-size: 16px;
+      background: #fff;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffc107;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .sign-in-btn {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .sign-in-btn:hover {
+      background: white;
+      color: #28a745;
+    }
+
+    .hero-section {
+      background: linear-gradient(rgba(40,167,69,0.8), rgba(32,201,151,0.8)),
+        url('images/budget-banner.jpg') center/cover no-repeat;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .hero-title {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .cta-button {
+      background: #ffc107;
+      color: #212529;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2em;
+      margin: 40px 0 20px;
+      color: #28a745;
+    }
+
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .category-tab {
+      background: #e0f6ed;
+      color: #28a745;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      border: 2px solid #28a745;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .category-tab.active, .category-tab:hover {
+      background: #28a745;
+      color: white;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-title {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+
+    .product-btn {
+      background: #28a745;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .best-value {
+      position: absolute;
+      top: 10px;
+      left: -40px;
+      transform: rotate(-45deg);
+      background: #ffc107;
+      color: #212529;
+      padding: 5px 50px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="https://www.freepnglogos.com/uploads/walmart-logo-png/walmart-logo-png-transparent-svg-vector-bie-supply-7.png" alt="Walmart Logo">
+        Walmart
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search budget items and top picks">
+        <button class="search-btn">🔍</button>
+      </div>
+      <button class="sign-in-btn">Sign In</button>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <h1 class="hero-title">Unbeatable Budget Deals</h1>
+    <p class="hero-subtitle">Save big on everyday essentials and seasonal steals</p>
+    <button class="cta-button">Shop Now</button>
+  </section>
+
+  <h2 class="section-title">Top Picks</h2>
+  <div class="category-tabs">
+    <button class="category-tab active">All</button>
+    <button class="category-tab">Electronics</button>
+    <button class="category-tab">Home</button>
+    <button class="category-tab">Fashion</button>
+    <button class="category-tab">Groceries</button>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="best-value">💰 BEST VALUE</div>
+      <div class="product-image" style="background-image: url('images/tv.png')"></div>
+      <div class="product-info">
+        <h3 class="product-title">Smart LED TV 43"</h3>
+        <p class="product-price">$249.99</p>
+        <button class="product-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background-image: url('images/sneakers.png')"></div>
+      <div class="product-info">
+        <h3 class="product-title">Casual Sneakers</h3>
+        <p class="product-price">$39.99</p>
+        <button class="product-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background-image: url('images/kitchen-set.png')"></div>
+      <div class="product-info">
+        <h3 class="product-title">Kitchen Essentials Set</h3>
+        <p class="product-price">$89.99</p>
+        <button class="product-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

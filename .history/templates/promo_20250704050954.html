@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 Walmart MEGA BLAST Sale - 72 Hours Only!</title>
+  <style>
+    /* Basic Resets & Theme */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+      color: #fff;
+    }
+
+    /* Header */
+    .mega-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(90deg, #ff6b35, #f7931e, #ff6b35);
+      color: white;
+      padding: 8px 0;
+      text-align: center;
+      font-weight: bold;
+      z-index: 1000;
+      font-size: 14px;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px 0;
+      position: sticky;
+      top: 32px;
+      z-index: 999;
+      border-bottom: 2px solid #ffc220;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 2.2em;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ffc220, #ff6b35);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(255, 194, 32, 0.5);
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 30px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border: 2px solid #ffc220;
+      border-radius: 30px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      outline: none;
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(45deg, #ffc220, #ff6b35);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .sign-in-btn {
+      background: linear-gradient(45deg, #ff6b35, #ffc220);
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 100px auto 50px;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ffc220, #ff6b35);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(255, 107, 53, 0.3);
+    }
+
+    .deal-badge {
+      position: absolute;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: bold;
+      top: 20px;
+      right: 20px;
+      z-index: 1;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ffc220;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .product-price {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #ff6b35;
+    }
+
+    .product-old-price {
+      font-size: 1em;
+      text-decoration: line-through;
+      color: #bbb;
+    }
+
+    .discount-badge {
+      background: linear-gradient(45deg, #27ae60, #2ecc71);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+    .product-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ffc220, #ff6b35);
+      color: #000;
+      font-size: 1em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="mega-banner">
+    🚨 URGENT: 72-Hour MEGA BLAST Sale - Everything Must Go! 🚨
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="https://1000logos.net/wp-content/uploads/2017/05/Walmart-logo.png" alt="Walmart Logo" />
+        Walmart
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search MEGA BLAST deals..." />
+        <button class="search-btn">🔍</button>
+      </div>
+      <button class="sign-in-btn">Sign In</button>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2 class="section-title">🔥 BLAST ZONE DEALS</h2>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="deal-badge">MEGA DEAL</div>
+          <div class="product-image" style="background-image: url('https://images-cdn.ubuy.co.in/633b2a8f039c2759ce0c8f12-samsung-43-inch-be43t-h-pro-tv.jpg');"></div>
+          <div class="product-info">
+            <h3 class="product-title">Samsung 65" 4K Smart TV</h3>
+            <div class="price-container">
+              <span class="product-price">$449.99</span>
+              <span class="product-old-price">$899.99</span>
+              <span class="discount-badge">50% OFF</span>
+            </div>
+            <button class="product-btn">Grab Now</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="deal-badge">FLASH DEAL</div>
+          <div class="product-image" style="background-image: url('https://fdn.gsmarena.com/imgroot/news/23/09/apple-iphone-15-pro-what-to-expect/-822/gsmarena_001.jpg');"></div>
+          <div class="product-info">
+            <h3 class="product-title">iPhone 15 Pro Max</h3>
+            <div class="price-container">
+              <span class="product-price">$899.99</span>
+              <span class="product-old-price">$1,399.99</span>
+              <span class="discount-badge">36% OFF</span>
+            </div>
+            <button class="product-btn">Blast Buy</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="deal-badge">HOT DEAL</div>
+          <div class="product-image" style="background-image: url('https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/47b7945e-a379-4c24-b9df-98f4eef178e5/NIKE+AIR+MAX+PLUS.png');"></div>
+          <div class="product-info">
+            <h3 class="product-title">Nike Air Max Collection</h3>
+            <div class="price-container">
+              <span class="product-price">$69.99</span>
+              <span class="product-old-price">$179.99</span>
+              <span class="discount-badge">61% OFF</span>
+            </div>
+            <button class="product-btn">Snag Deal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

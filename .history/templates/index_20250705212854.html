@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart - Hyper-Personalized</title>
+
+  <style>
+    :root {
+      --walmart-blue: #0071ce;
+      --walmart-yellow: #ffc220;
+      --walmart-dark: #004c91;
+      --text-primary: #2e2f32;
+      --text-secondary: #6b7280;
+      --border-color: #e5e7eb;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #fff;
+      color: var(--text-primary);
+    }
+
+    /* Header */
+    .header {
+      background: var(--walmart-blue);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 2rem;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--walmart-yellow);
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+      flex: 1;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--walmart-yellow);
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 20px;
+      padding: 0.3rem 0.5rem;
+      margin: 0 1.5rem;
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      flex: 1;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 1rem;
+    }
+
+    .search-btn {
+      background: var(--walmart-yellow);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .cart-icon {
+      background: var(--walmart-yellow);
+      color: var(--walmart-dark);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Hero Banner */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--walmart-blue), var(--walmart-dark));
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-banner h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--walmart-yellow);
+    }
+
+    .hero-banner p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      background: var(--walmart-yellow);
+      color: var(--walmart-dark);
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+
+    .cta-button:hover {
+      background: #ffb400;
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .search-bar {
+        width: 100%;
+        margin: 1rem 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732229.png" alt="Logo" />
+        <span class="logo-text">Walmart</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#">Departments</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Grocery</a></li>
+        <li><a href="#">Electronics</a></li>
+      </ul>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search everything at Walmart" />
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <a href="#" class="cart-icon">🛒</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="container">
+    <div class="hero-banner">
+      <h1>Hyper-Personalized Shopping</h1>
+      <p>Discover products curated just for you with AI-powered recommendations</p>
+      <button class="cta-button">Get Started</button>
+    </div>
+  </section>
+
+</body>
+</html>

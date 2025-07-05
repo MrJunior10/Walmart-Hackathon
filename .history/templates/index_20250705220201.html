@@ -58,10 +58,15 @@
     }
 
     .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--walmart-yellow);
-      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -284,7 +289,9 @@
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-      <a href="#" class="logo">Walmart</a>
+      <div class="logo">
+        <img src="https://1000logos.net/wp-content/uploads/2017/05/Walmart-Logo-768x432.png" alt="Walmart Logo">
+      </div>
       <ul class="nav-links">
         <li><a href="#">Departments</a></li>
         <li><a href="#">Services</a></li>
@@ -298,6 +305,8 @@
       <a href="#" class="cart-icon">🛒</a>
     </nav>
   </header>
+
+  <!-- Rest of your body (unchanged)... -->
 
   <!-- Welcome -->
   <div id="welcome" class="container active">

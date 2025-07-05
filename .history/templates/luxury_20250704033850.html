@@ -220,10 +220,8 @@
     .product-image {
       width: 100%;
       height: 200px;
-      background-size: contain;
-      background-repeat: no-repeat;
+      background-size: cover;
       background-position: center;
-      background-color: #1a1a1a;
     }
 
     .product-info {
@@ -312,6 +310,7 @@
 
     <section>
       <h2 class="section-title">Premium Collection</h2>
+
       <div class="category-tabs">
         <button class="category-tab active" onclick="filterProducts('all')">All</button>
         <button class="category-tab" onclick="filterProducts('electronics')">Electronics</button>
@@ -319,7 +318,10 @@
         <button class="category-tab" onclick="filterProducts('fashion')">Fashion</button>
         <button class="category-tab" onclick="filterProducts('groceries')">Groceries</button>
       </div>
-      <div class="products-grid" id="products-grid"></div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- JS Populates Products Here -->
+      </div>
     </section>
   </main>
 

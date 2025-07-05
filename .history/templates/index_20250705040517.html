@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart - Hyper-Personalized Shopping</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V0FV8Q991V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V0FV8Q991V');
+  </script>
+
+  <style>
+    :root {
+      --blue: #0071ce;
+      --yellow: #ffc220;
+      --dark: #004c91;
+      --light: #f7f8fa;
+      --text: #2e2f32;
+      --gray: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: white;
+      margin: 0; padding: 0;
+      color: var(--text);
+    }
+    header {
+      background: var(--blue);
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--blue), var(--dark));
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: var(--yellow);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin: 1rem 0 2rem;
+    }
+    .hero button {
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1.5rem;
+      background: #fff;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      width: 280px;
+      text-align: center;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .form-section, .result-section {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    label {
+      font-weight: 600;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button.submit {
+      background: var(--yellow);
+      border: none;
+      padding: 1rem;
+      font-weight: bold;
+      width: 100%;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+    .result-section img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+    .price {
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Walmart</h2>
+  </header>
+
+  <section class="hero">
+    <h1>Hyper-Personalized Shopping</h1>
+    <p>Discover products curated just for you with AI-powered recommendations</p>
+    <button onclick="document.getElementById('form-section').scrollIntoView({behavior:'smooth'})">Get Started</button>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Personalized Recommendations</h3>
+      <p>Get product suggestions tailored to your preferences and location</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Lightning Fast</h3>
+      <p>Instant results powered by advanced AI technology</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌟</div>
+      <h3>Best Deals</h3>
+      <p>Find the best prices and exclusive offers in your area</p>
+    </div>
+  </section>
+
+  <section class="form-section" id="form-section">
+    <h2 style="text-align:center; color:var(--blue);">Tell Us About You</h2>
+    <div class="form-group">
+      <label for="region">Region</label>
+      <input id="region" placeholder="Will auto-fill via IP" />
+    </div>
+    <div class="form-group">
+      <label for="medium">Medium</label>
+      <select id="medium">
+        <option value="">Select source</option>
+        <option value="PaidSocial">Social Media</option>
+        <option value="Email">Email Campaign</option>
+        <option value="Search">Search Engine</option>
+        <option value="Direct">Direct Visit</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category">
+        <option value="">Select category</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing & Accessories</option>
+        <option value="Home">Home & Garden</option>
+        <option value="Sports">Sports & Outdoors</option>
+        <option value="Toys">Toys & Games</option>
+        <option value="Grocery">Grocery & Food</option>
+      </select>
+    </div>
+    <button class="submit" onclick="generateLanding()">Generate My Personalized Experience</button>
+  </section>
+
+  <section class="result-section" id="result-section" style="display:none;">
+    <h2 style="color: var(--blue); text-align: center;">Your Personalized Hero Product</h2>
+    <img id="heroImg" src="" alt="Product" />
+    <p class="price" id="price"></p>
+    <p id="caption"></p>
+    <div style="text-align:center; margin-top:1rem;">
+      <button class="submit" onclick="window.location.href='https://www.walmart.com'">Shop Now</button>
+    </div>
+  </section>
+
+  <script>
+    const regionInput = document.getElementById('region');
+    const resultSection = document.getElementById('result-section');
+    const heroImg = document.getElementById('heroImg');
+    const priceEl = document.getElementById('price');
+    const captionEl = document.getElementById('caption');
+
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => regionInput.value = data.region || 'United States')
+      .catch(() => regionInput.value = 'United States');
+
+    async function generateLanding() {
+      const region = regionInput.value.trim();
+      const medium = document.getElementById('medium').value;
+      const category = document.getElementById('category').value;
+
+      if (!region || !medium || !category) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      captionEl.textContent = 'Loading...';
+      resultSection.style.display = 'block';
+
+      try {
+        const res = await fetch('/generate_landing', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ region, medium, category })
+        });
+
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Error occurred');
+
+        heroImg.src = `/images/${json.modules.hero}`;
+        captionEl.textContent = json.caption || 'No caption';
+        priceEl.textContent = json.price || '$0.00';
+      } catch (err) {
+        captionEl.textContent = 'Something went wrong.';
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

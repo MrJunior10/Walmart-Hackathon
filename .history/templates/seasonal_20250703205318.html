@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart - Save Money. Live Better.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        /* Layout Switch Controls */
+        .layout-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .layout-switcher h3 {
+            margin-bottom: 10px;
+            color: #004c91;
+            font-size: 14px;
+        }
+
+        .layout-btn {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .layout-btn.active {
+            transform: scale(1.05);
+        }
+
+        /* Header Styles */
+        header {
+            background: #004c91;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffc220;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffc220;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sign-in-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .sign-in-btn:hover {
+            background: white;
+            color: #004c91;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-content {
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Product Sections */
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab.active {
+            transform: scale(1.05);
+        }
+
+        /* Layout-specific styles */
+        .layout-default {
+            background: #f8f9fa;
+        }
+
+        .layout-default header {
+            background: #004c91;
+        }
+
+        .layout-default .hero-section {
+            background: linear-gradient(135deg, #0071ce, #004c91);
+            color: white;
+        }
+
+        .layout-default .product-card {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .layout-default .product-btn {
+            background: #0071ce;
+            color: white;
+        }
+
+        .layout-default .cta-button {
+            background: #ffc220;
+            color: #004c91;
+        }
+
+        .layout-default .category-tab {
+            background: #e9ecef;
+            color: #004c91;
+        }
+
+        .layout-default .category-tab.active {
+            background: #0071ce;
+            color: white;
+        }
+
+        /* Promo Layout */
+        .layout-promo {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            animation: promoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes promoGlow {
+            0% { background: linear-gradient(45deg, #ff6b6b, #ffa500); }
+            100% { background: linear-gradient(45deg, #ff4757, #ff6348); }
+        }
+
+        .layout-promo header {
+            background: #dc3545;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .layout-promo .hero-section {
+            background: linear-gradient(135deg, #ff4757, #ff6348);
+            color: white;
+            animation: flashy 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes flashy {
+            0% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 71, 87, 0.8); }
+        }
+
+        .layout-promo .product-card {
+            background: white;
+            border: 3px solid #ff4757;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+            position: relative;
+            overflow: visible;
+        }
+
+        .layout-promo .product-card::before {
+            content: "🔥 HOT DEAL";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4757;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .layout-promo .product-btn {
+            background: linear-gradient(45deg, #ff4757, #ff6348);
+            color: white;
+            animation: buttonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+        }
+
+        .layout-promo .cta-button {
+            background: #ffc220;
+            color: #dc3545;
+            animation: bounce 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        /* Seasonal Layout */
+        .layout-seasonal {
+            background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+        }
+
+        .layout-seasonal header {
+            background: linear-gradient(135deg, #4A90E2, #87CEEB);
+        }
+
+        .layout-seasonal .hero-section {
+            background: linear-gradient(135deg, #87CEEB, #B8E6B8);
+            color: #2C3E50;
+        }
+
+        .layout-seasonal .product-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .layout-seasonal .product-btn {
+            background: linear-gradient(135deg, #4A90E2, #87CEEB);
+            color: white;
+        }
+
+        .layout-seasonal .cta-button {
+            background: #B8E6B8;
+            color: #2C3E50;
+        }
+
+        .layout-seasonal .category-tab {
+            background: rgba(255, 255, 255, 0.7);
+            color: #2C3E50;
+        }
+
+        .layout-seasonal .category-tab.active {
+            background: #4A90E2;
+            color: white;
+        }
+
+        /* Luxury Layout */
+        .layout-luxury {
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            color: #d4af37;
+        }
+
+        .layout-luxury header {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .layout-luxury .hero-section {
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            color: #d4af37;
+            border: 2px solid #d4af37;
+        }
+
+        .layout-luxury .product-card {
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+        }
+
+        .layout-luxury .product-btn {
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: #000000;
+        }
+
+        .layout-luxury .cta-button {
+            background: #d4af37;
+            color: #000000;
+        }
+
+        .layout-luxury .category-tab {
+            background: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+        }
+
+        .layout-luxury .category-tab.active {
+            background: #d4af37;
+            color: #000000;
+        }
+
+        /* Budget Layout */
+        .layout-budget {
+            background: #f8f9fa;
+        }
+
+        .layout-budget header {
+            background: #28a745;
+        }
+
+        .layout-budget .hero-section {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .layout-budget .product-card {
+            background: white;
+            border: 2px solid #28a745;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.1);
+        }
+
+        .layout-budget .product-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .layout-budget .cta-button {
+            background: #ffc107;
+            color: #000000;
+        }
+
+        .layout-budget .category-tab {
+            background: #e9ecef;
+            color: #28a745;
+        }
+
+        .layout-budget .category-tab.active {
+            background: #28a745;
+            color: white;
+        }
+
+        .layout-budget .product-card::after {
+            content: "💰 BEST VALUE";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 2em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .layout-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="layout-default">
+    <div class="layout-switcher">
+        <h3>Layout Themes</h3>
+        <button class="layout-btn active" onclick="switchLayout('default')" style="background: #0071ce; color: white;">📦 Default</button>
+        <button class="layout-btn" onclick="switchLayout('promo')" style="background: #ff4757; color: white;">🔥 Promo</button>
+        <button class="layout-btn" onclick="switchLayout('seasonal')" style="background: #87CEEB; color: white;">🌦 Seasonal</button>
+        <button class="layout-btn" onclick="switchLayout('luxury')" style="background: #d4af37; color: black;">👑 Luxury</button>
+        <button class="layout-btn" onclick="switchLayout('budget')" style="background: #28a745; color: white;">💸 Budget</button>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">★ Walmart</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search everything at Walmart online and in store">
+                <button class="search-btn">🔍</button>
+            </div>
+            <button class="sign-in-btn">Sign In</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Save Money. Live Better.</h1>
+                <p class="hero-subtitle">Discover amazing deals on everything you need</p>
+                <button class="cta-button">Shop Now</button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Recommended for You</h2>
+            
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterProducts('all')">All</button>
+                <button class="category-tab" onclick="filterProducts('electronics')">Electronics</button>
+                <button class="category-tab" onclick="filterProducts('home')">Home & Garden</button>
+                <button class="category-tab" onclick="filterProducts('fashion')">Fashion</button>
+                <button class="category-tab" onclick="filterProducts('groceries')">Groceries</button>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be generated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                title: "Samsung 65\" 4K Smart TV",
+                price: "$549.99",
+                category: "electronics",
+                image: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+            },
+            {
+                id: 2,
+                title: "iPhone 15 Pro Max",
+                price: "$1,199.99",
+                category: "electronics",
+                image: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+            },
+            {
+                id: 3,
+                title: "Nike Air Max Sneakers",
+                price: "$129.99",
+                category: "fashion",
+                image: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+            },
+            {
+                id: 4,
+                title: "KitchenAid Stand Mixer",
+                price: "$299.99",
+                category: "home",
+                image: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+            },
+            {
+                id: 5,
+                title: "Organic Coffee Beans",
+                price: "$19.99",
+                category: "groceries",
+                image: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+            },
+            {
+                id: 6,
+                title: "Wireless Bluetooth Headphones",
+                price: "$89.99",
+                category: "electronics",
+                image: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+            },
+            {
+                id: 7,
+                title: "Designer Handbag",
+                price: "$249.99",
+                category: "fashion",
+                image: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)"
+            },
+            {
+                id: 8,
+                title: "Garden Tool Set",
+                price: "$79.99",
+                category: "home",
+                image: "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)"
+            }
+        ];
+
+        let currentCategory = 'all';
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const filteredProducts = currentCategory === 'all' 
+                ? products 
+                : products.filter(product => product.category === currentCategory);
+
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-image" style="background: ${product.image}"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-price">${product.price}</p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            currentCategory = category;
+            
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderProducts();
+        }
+
+        function switchLayout(layout) {
+            const body = document.body;
+            
+            // Remove all layout classes
+            body.classList.remove('layout-default', 'layout-promo', 'layout-seasonal', 'layout-luxury', 'layout-budget');
+            
+            // Add new layout class
+            body.classList.add(`layout-${layout}`);
+            
+            // Update active button
+            document.querySelectorAll('.layout-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update hero content based on layout
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            switch(layout) {
+                case 'promo':
+                    heroTitle.textContent = '🔥 MEGA SALE EVENT!';
+                    heroSubtitle.textContent = 'Up to 70% OFF! Limited time only - Don\'t miss out!';
+                    break;
+                case 'seasonal':
+                    heroTitle.textContent = '🌸 Spring Collection';
+                    heroSubtitle.textContent = 'Fresh deals for the new season';
+                    break;
+                case 'luxury':
+                    heroTitle.textContent = '👑 Premium Selection';
+                    heroSubtitle.textContent = 'Curated luxury items for discerning customers';
+                    break;
+                case 'budget':
+                    heroTitle.textContent = '💰 Unbeatable Deals';
+                    heroSubtitle.textContent = 'Maximum savings on everyday essentials';
+                    break;
+                default:
+                    heroTitle.textContent = 'Save Money. Live Better.';
+                    heroSubtitle.textContent = 'Discover amazing deals on everything you need';
+            }
+        }
+
+        // Initialize the page
+        renderProducts();
+    </script>
+</body>
+</html>

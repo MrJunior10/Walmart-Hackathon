@@ -400,10 +400,10 @@
 
         if (!res.ok) throw new Error(json.error);
 
-        heroImg.src = `/images/${json.modules.hero}`;
+        heroImg.src = /images/${json.modules.hero};
         captionEl.textContent = json.caption || 'No caption available.';
         document.querySelector('.price-tag').textContent = json.price || '';
-        shopBtn.onclick = () => window.location.href = `/${json.modules.hero.replace('.jpg', '')}`;
+        shopBtn.onclick = () => window.location.href = /${json.modules.hero.replace('.jpg', '')};
 
       } catch (err) {
         console.error(err);

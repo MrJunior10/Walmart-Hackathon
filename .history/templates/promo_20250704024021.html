@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 MEGA SALE EVENT - Walmart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            animation: promoGlow 3s ease-in-out infinite alternate;
+            min-height: 100vh;
+        }
+
+        @keyframes promoGlow {
+            0% { background: linear-gradient(45deg, #ff6b6b, #ffa500); }
+            100% { background: linear-gradient(45deg, #ff4757, #ff6348); }
+        }
+
+        /* Header */
+        header {
+            background: #dc3545;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffc220;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: 3px solid #ffc220;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            animation: searchGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes searchGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 194, 32, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 194, 32, 0.8); }
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffc220;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .sign-in-btn {
+            background: #ffc220;
+            color: #dc3545;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: buttonPulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff4757, #ff6348);
+            color: white;
+            animation: flashy 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        @keyframes flashy {
+            0% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 71, 87, 0.8); }
+        }
+
+        .hero-content {
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: titleShake 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: subtitleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtitleGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+        }
+
+        .cta-button {
+            background: #ffc220;
+            color: #dc3545;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: bounce 1s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-15px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffc220;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation: countdownBlink 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes countdownBlink {
+            0% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: #ff4757;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 80px;
+            animation: timerPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes timerPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .time-value {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
+
+        /* Product Sections */
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border: 3px solid #ff4757;
+            border-radius: 20px;
+            overflow: visible;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: cardFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .product-card::before {
+            content: "🔥 HOT DEAL";
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #ff4757;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            z-index: 10;
+            animation: dealBlink 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes dealBlink {
+            0% { background: #ff4757; }
+            100% { background: #ff6348; }
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 71, 87, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff4757;
+        }
+
+        .product-old-price {
+            font-size: 1.2em;
+            text-decoration: line-through;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff4757, #ff6348);
+            color: white;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: buttonGlow 1.5s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+        }
+
+        .product-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.5);
+        }
+
+        /* Flash Sale Banner */
+        .flash-banner {
+            background: linear-gradient(45deg, #ff4757, #ffc220);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            animation: flashBanner 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes flashBanner {
+            0% { background: linear-gradient(45deg, #ff4757, #ffc220); }
+            100% { background: linear-gradient(45deg, #ffc220, #ff4757); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 2.5em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown-timer {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">★ Walmart</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search MEGA SALE items now!">
+                <button class="search-btn">🔍</button>
+            </div>
+            <button class="sign-in-btn">Sign In</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="flash-banner">
+            ⚡ FLASH SALE: Extra 20% OFF with code MEGA20 ⚡
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">🔥 MEGA SALE EVENT!</h1>
+                <p class="hero-subtitle">Up to 70% OFF! Limited time only - Don't miss out!</p>
+                <button class="cta-button">Shop Deals Now</button>
+            </div>
+        </section>
+
+        <section class="countdown-section">
+            <h2 class="countdown-title">⏰ SALE ENDS IN:</h2>
+            <div class="countdown-timer">
+                <div class="time-unit">
+                    <span class="time-value">02</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value">14</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value">37</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value">22</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">🔥 HOTTEST DEALS</h2>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Samsung 65" 4K Smart TV</h3>
+                        <p class="product-old-price">$899.99</p>
+                        <p class="product-price">$549.99</p>
+                        <button class="product-btn">Buy Now!</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 15 Pro Max</h3>
+                        <p class="product-old-price">$1,399.99</p>
+                        <p class="product-price">$999.99</p>
+                        <button class="product-btn">Buy Now!</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Nike Air Max Collection</h3>
+                        <p class="product-old-price">$179.99</p>
+                        <p class="product-price">$89.99</p>
+                        <button class="product-btn">Buy Now!</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">KitchenAid Pro Mixer</h3>
+                        <p class="product-old-price">$449.99</p>
+                        <p class="product-price">$249.99</p>
+                        <button class="product-btn">Buy Now!</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Premium Headphones</h3>
+                        <p class="product-old-price">$199.99</p>
+                        <p class="product-price">$79.99</p>
+                        <button class="product-btn">Buy Now!</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gaming Console Bundle</h3>
+                        <p class="product-old-price">$599.99</p>
+                        <p class="product-price">$399.99</p>
+                        <button class="product-btn">Buy Now!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Countdown timer functionality
+        function updateCountdown() {
+            const timeUnits = document.querySelectorAll('.time-value');
+            const currentTimes = [
+                parseInt(timeUnits[0].textContent),
+                parseInt(timeUnits[1].textContent),
+                parseInt(timeUnits[2].textContent),
+                parseInt(timeUnits[3].textContent)
+            ];
+
+            // Decrease seconds
+            currentTimes[3]--;
+            
+            if (currentTimes[3] < 0) {
+                currentTimes[3] = 59;
+                currentTimes[2]--;
+                
+                if (currentTimes[2] < 0) {
+                    currentTimes[2] = 59;
+                    currentTimes[1]--;
+                    
+                    if (currentTimes[1] < 0) {
+                        currentTimes[1] = 23;
+                        currentTimes[0]--;
+                        
+                        if (currentTimes[0] < 0) {
+                            currentTimes[0] = 0;
+                        }
+                    }
+                }
+            }
+
+            timeUnits[0].textContent = currentTimes[0].toString().padStart(2, '0');
+            timeUnits[1].textContent = currentTimes[1].toString().padStart(2, '0');
+            timeUnits[2].textContent = currentTimes[2].toString().padStart(2, '0');
+            timeUnits[3].textContent = currentTimes[3].toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Add click effects to buttons
+        document.querySelectorAll('.product-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'buttonGlow 1.5s ease-in-out infinite alternate';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

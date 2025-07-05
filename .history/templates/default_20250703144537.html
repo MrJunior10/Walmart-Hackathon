@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart – Default</title>
+  <style>
+    /* Page‐wrapper for fade transitions */
+    .page-container {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease-in-out;
+    }
+    .page-container.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .page-container.exit {
+      opacity: 0;
+    }
+
+    /* ==== Global Styles ==== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      background: #f6f8fa;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ==== Header ==== */
+    header {
+      position: relative; padding: 16px 0; overflow: hidden;
+    }
+    .header-gradient {
+      position: absolute; top: 0; left: 0; right: 0; height: 100%;
+      background: linear-gradient(270deg, #0071ce, #00c6fb, #ffd600, #0071ce);
+      background-size: 600% 600%;
+      animation: gradientMove 10s ease-in-out infinite;
+      opacity: 0.18; pointer-events:none; z-index:0;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .header-content {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: auto;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .logo { font-size: 1.7em; color: #0071ce; font-weight:700; }
+    .search-bar {
+      flex: 1; padding: 10px; border-radius: 12px; border:none;
+      box-shadow: 0 2px 8px rgba(0,113,206,0.06);
+    }
+    .sign-in {
+      padding: 8px 20px; border:none; border-radius:8px;
+      background: linear-gradient(90deg,#0071ce 60%,#00c6fb 100%);
+      color: #fff; cursor:pointer;
+    }
+
+    /* ==== Banner ==== */
+    .banner {
+      position: relative; padding: 32px 0 16px;
+    }
+    .banner-gradient {
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background: linear-gradient(120deg,#7ed6fb 60%,#fff 100%,#ffd600 120%);
+      background-size:200% 200%; animation: gradientMove 12s ease-in-out infinite;
+      opacity:0.22; pointer-events:none; z-index:0;
+    }
+    .banner-content {
+      position:relative; z-index:1;
+      max-width:900px; margin:auto; display:flex; align-items:center; gap:1rem;
+    }
+    .banner-content h1 {
+      font-size:2.7em; color:#0071ce; font-weight:700;
+    }
+    .banner-content img {
+      width:180px; border-radius:16px; box-shadow:0 4px 24px rgba(0,113,206,0.10);
+    }
+
+    /* ==== Recommended Grid ==== */
+    .recommended { max-width:900px; margin:32px auto; padding:0 16px; }
+    .recommended h2 {
+      font-size:1.7em; color:#0071ce; margin-bottom:16px; font-weight:700;
+    }
+    .product-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+      gap:24px;
+    }
+    .product-card {
+      background:rgba(255,255,255,0.55); border-radius:24px; padding:24px 16px 20px;
+      text-align:center; box-shadow:0 8px 32px rgba(0,113,206,0.10),0 2px 8px rgba(0,0,0,0.04);
+      transition:transform .3s,box-shadow .3s,background .3s;
+      position:relative; overflow:hidden; backdrop-filter:blur(8px);
+    }
+    .product-card:hover {
+      transform:translateY(-12px) scale(1.04) rotateY(6deg);
+      box-shadow:0 16px 48px rgba(0,113,206,0.18),0 2px 8px rgba(0,0,0,0.10);
+      background:rgba(255,255,255,0.75);
+    }
+    .product-card img {
+      width:100px; height:100px; object-fit:contain;
+      margin-bottom:12px;
+      animation: floatImg 3s ease-in-out infinite alternate;
+    }
+    @keyframes floatImg { from {transform:translateY(0);} to {transform:translateY(-12px);} }
+    .product-title { font-weight:700; margin-bottom:8px; }
+    .view-more {
+      background:linear-gradient(90deg,#2196f3 0%,#00c6fb 100%);
+      color:#fff; padding:10px 24px; border:none; border-radius:8px;
+      cursor:pointer; font-weight:700; margin-top:8px;
+      transition:background .2s,transform .2s;
+    }
+    .view-more:hover { transform:scale(1.05); }
+
+    /* ==== Responsive ==== */
+    @media(max-width:600px){
+      .banner-content, .header-content{ flex-direction:column; gap:.5rem; }
+      .product-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="page" class="page-container">
+    <header>
+      <div class="header-gradient"></div>
+      <div class="header-content">
+        <div class="logo">Walmart</div>
+        <input class="search-bar" type="text" placeholder="Search" />
+        <button class="sign-in">Sign in</button>
+      </div>
+    </header>
+
+    <section class="banner">
+      <div class="banner-gradient"></div>
+      <div class="banner-content">
+        <h1>Default</h1>
+        <img src="images/default.jpg" alt="Default Banner" />
+      </div>
+    </section>
+
+    <section class="recommended">
+      <h2>Recommended for You</h2>
+      <div class="product-grid">
+        <!-- Six sample “default” items -->
+        <div class="product-card">
+          <img src="images/default.jpg" alt="Default Item 1" />
+          <div class="product-title">Default Item 1</div>
+          <button class="view-more">View more</button>
+        </div>
+        <div class="product-card">
+          <img src="images/default.jpg" alt="Default Item 2" />
+          <div class="product-title">Default Item 2</div>
+          <button class="view-more">View more</button>
+        </div>
+        <div class="product-card">
+          <img src="images/default.jpg" alt="Default Item 3" />
+          <div class="product-title">Default Item 3</div>
+          <button class="view-more">View more</button>
+        </div>
+        <div class="product-card">
+          <img src="images/default.jpg" alt="Default Item 4" />
+          <div class="product-title">Default Item 4</div>
+          <button class="view-more">View more</button>
+        </div>
+        <div class="product-card">
+          <img src="images/default.jpg" alt="Default Item 5" />
+          <div class="product-title">Default Item 5</div>
+          <button class="view-more">View more</button>
+        </div>
+        <div class="product-card">
+          <img src="images/default.jpg" alt="Default Item 6" />
+          <div class="product-title">Default Item 6</div>
+          <button class="view-more">View more</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // fade‐in on load
+    document.addEventListener('DOMContentLoaded', () =>
+      document.getElementById('page').classList.add('visible')
+    );
+
+    // fade‐out on any button/link click
+    document.querySelectorAll('a, .view-more, .sign-in').forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        const href = el.getAttribute('href') || '#';
+        document.getElementById('page').classList.add('exit');
+        setTimeout(() => window.location = href, 600);
+      });
+    });
+  </script>
+</body>
+</html>
