@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart Unbeatable Deals - Budget Savings</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f8f9fa;
+      transition: all 0.3s ease;
+    }
+
+    header {
+      background: #28a745;
+      color: white;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      gap: 20px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 40px;
+    }
+
+    .logo-text {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #ffc107;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+      color: #333;
+    }
+
+    .search-bar input::placeholder {
+      color: #666;
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffc107;
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .sign-in-btn {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .sign-in-btn:hover {
+      background: white;
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="images/walmart-logo.png" alt="Walmart Logo" />
+        <span class="logo-text">Walmart</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search budget deals and everyday essentials" />
+        <button class="search-btn">🔍</button>
+      </div>
+      <button class="sign-in-btn">Sign In</button>
+    </div>
+  </header>
+
+  <!-- The rest of your HTML remains unchanged -->
+</body>
+</html>

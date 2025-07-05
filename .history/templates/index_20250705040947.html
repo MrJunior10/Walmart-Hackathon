@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart - Hyper-Personalized Shopping</title>
+  <link href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
+  <style>
+    :root {
+      --walmart-blue: #0071ce;
+      --walmart-yellow: #ffc220;
+      --walmart-dark: #004c91;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f7f8fa;
+      --text-primary: #2e2f32;
+      --text-secondary: #6b7280;
+      --border-color: #e5e7eb;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .header { background: var(--walmart-blue); color: white; padding: 1rem 0; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
+    .nav { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+    .logo { font-size: 2rem; font-weight: bold; color: var(--walmart-yellow); text-decoration: none; }
+    .nav-links { display: flex; list-style: none; gap: 2rem; }
+    .nav-links a { color: white; text-decoration: none; transition: var(--transition); }
+    .nav-links a:hover { color: var(--walmart-yellow); }
+    .search-bar { flex: 1; max-width: 500px; margin: 0 2rem; position: relative; }
+    .search-bar input { width: 100%; padding: 0.75rem 3rem 0.75rem 1rem; border: none; border-radius: 25px; font-size: 1rem; outline: none; }
+    .search-btn { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: var(--walmart-yellow); border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; transition: var(--transition); }
+    .search-btn:hover { background: #e6ae00; }
+    .cart-icon { background: var(--walmart-yellow); color: var(--walmart-dark); padding: 0.75rem; border-radius: 50%; text-decoration: none; font-weight: bold; transition: var(--transition); }
+    .cart-icon:hover { background: #e6ae00; transform: scale(1.1); }
+    .container { position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; opacity: 0; visibility: hidden; transition: var(--transition); padding-top: 5rem; }
+    .container.active { opacity: 1; visibility: visible; }
+    .welcome-content { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; text-align: center; }
+    .hero-banner { background: linear-gradient(135deg, var(--walmart-blue), var(--walmart-dark)); color: white; padding: 4rem 2rem; border-radius: 20px; margin-bottom: 3rem; box-shadow: var(--shadow-lg); }
+    .hero-banner h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--walmart-yellow); }
+    .hero-banner p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+    .cta-button { background: var(--walmart-yellow); color: var(--walmart-dark); border: none; padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; border-radius: 25px; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow); }
+    .cta-button:hover { background: #e6ae00; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .form-content { max-width: 600px; margin: 0 auto; padding: 2rem; }
+    .form-card { background: white; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
+    .form-card h2 { color: var(--walmart-blue); margin-bottom: 2rem; text-align: center; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary); }
+    .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; transition: var(--transition); }
+    .result-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .carousel { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem; }
+    .product-card { background: white; padding: 1rem; border-radius: 15px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border-color); }
+    .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem; }
+    .price-tag { background: var(--walmart-yellow); color: var(--walmart-dark); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; display: inline-block; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo">Walmart</a>
+      <ul class="nav-links">
+        <li><a href="#">Departments</a></li>
+        <li><a href="#">Services</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" placeholder="Search everything at Walmart">
+        <button class="search-btn">🔍</button>
+      </div>
+      <a href="#" class="cart-icon">🛒</a>
+    </nav>
+  </header>
+
+  <div id="welcome" class="container active">
+    <div class="welcome-content">
+      <div class="hero-banner">
+        <h1>Hyper-Personalized Shopping</h1>
+        <p>Discover products curated just for you with AI-powered recommendations</p>
+        <button id="getStarted" class="cta-button">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="form" class="container">
+    <div class="form-content">
+      <div class="form-card">
+        <h2>Tell Us About Your Preferences</h2>
+        <div class="form-group">
+          <label for="region">Region</label>
+          <input id="region" />
+        </div>
+        <div class="form-group">
+          <label for="medium">Medium</label>
+          <input id="medium" />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input id="category" />
+        </div>
+        <button id="generate" class="cta-button" style="width:100%">Generate My Personalized Experience</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="result" class="container">
+    <div class="result-content">
+      <h2 style="color: var(--walmart-blue); margin-bottom: 2rem; text-align:center;">Your Personalized Recommendations</h2>
+      <div class="carousel" id="productCarousel"></div>
+    </div>
+  </div>
+
+  <script>
+    const welcome = document.getElementById("welcome");
+    const form = document.getElementById("form");
+    const result = document.getElementById("result");
+    const getStarted = document.getElementById("getStarted");
+    const generate = document.getElementById("generate");
+    const productCarousel = document.getElementById("productCarousel");
+
+    function showScreen(screen) {
+      [welcome, form, result].forEach(el => el.classList.remove("active"));
+      screen.classList.add("active");
+    }
+
+    getStarted.onclick = () => showScreen(form);
+
+    const regionData = ["California", "Texas", "New York", "Florida", "Delhi", "Karnataka"];
+    const mediumData = ["PaidSocial", "Email", "Search", "Display", "Affiliate"];
+    const categoryData = ["Electronics", "Groceries", "Fashion", "Home", "Beauty"];
+
+    const setupAutocomplete = (selector, data) => {
+      new autoComplete({
+        selector: selector,
+        placeHolder: "Start typing...",
+        data: { src: data },
+        threshold: 0,
+        debounce: 300,
+        resultsList: { render: true, container: source => source.setAttribute("id", selector+"_list") },
+        resultItem: { content: data => data.match, highlight: true },
+        onSelection: feedback => document.querySelector(selector).value = feedback.selection.value
+      });
+    };
+
+    setupAutocomplete("#region", regionData);
+    setupAutocomplete("#medium", mediumData);
+    setupAutocomplete("#category", categoryData);
+
+    generate.onclick = async () => {
+      const region = document.getElementById("region").value.trim();
+      const medium = document.getElementById("medium").value.trim();
+      const category = document.getElementById("category").value.trim();
+
+      if (!region || !medium || !category) return alert("Please fill all fields.");
+
+      showScreen(result);
+      productCarousel.innerHTML = "<p style='text-align:center;'>Loading...</p>";
+
+      try {
+        const res = await fetch("/generate_landing", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ region, medium, category })
+        });
+
+        const data = await res.json();
+        productCarousel.innerHTML = "";
+        data.products.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.innerHTML = `
+            <img src="${p.image}" alt="Product Image" />
+            <h4>${p.title}</h4>
+            <div class="price-tag">$${p.price}</div>
+          `;
+          productCarousel.appendChild(card);
+        });
+      } catch (e) {
+        productCarousel.innerHTML = "<p style='text-align:center;'>Something went wrong. Please try again later.</p>";
+      }
+    };
+  </script>
+</body>
+</html>

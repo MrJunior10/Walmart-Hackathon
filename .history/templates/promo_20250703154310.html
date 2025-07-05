@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walmart – Promo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f6f8fa;
+      color: #222;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .layout-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .layout-btn {
+      display: block;
+      margin: 6px 0;
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #0071ce;
+      color: white;
+      font-weight: bold;
+    }
+
+    header {
+      position: relative;
+      padding: 16px 0;
+      background: #0071ce;
+      color: white;
+    }
+    .header-content {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+    }
+    .logo {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #ffd600;
+    }
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+      position: relative;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 20px;
+      border: none;
+      font-size: 16px;
+    }
+    .sign-in {
+      background: #ffd600;
+      color: #0071ce;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #ff6b6b, #ffa500);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero-section h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .hero-section p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    .cta-btn {
+      background: #fff;
+      color: #ff4757;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      transition: transform 0.2s;
+    }
+    .cta-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .products {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .products h2 {
+      font-size: 2em;
+      color: #0071ce;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+    }
+    .product-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+    .product-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .view-more {
+      background: #0071ce;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout-switcher">
+    <button class="layout-btn" onclick="switchTheme('promo')">Promo</button>
+    <button class="layout-btn" onclick="switchTheme('default')">Default</button>
+    <button class="layout-btn" onclick="switchTheme('luxury')">Luxury</button>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">Walmart</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search everything at Walmart">
+      </div>
+      <button class="sign-in">Sign In</button>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <h1>🔥 MEGA SALE EVENT!</h1>
+    <p>Up to 70% OFF! Limited time only - Don’t miss out!</p>
+    <button class="cta-btn">Shop Now</button>
+  </section>
+
+  <section class="products">
+    <h2>Recommended for You</h2>
+    <div class="products-grid" id="productsGrid">
+      <!-- Products will be injected here -->
+    </div>
+  </section>
+
+  <script>
+    const products = [
+      { title: 'Samsung Smart TV', image: 'images/tv.png', link: '#' },
+      { title: 'iPhone 15 Pro', image: 'images/iphone.png', link: '#' },
+      { title: 'Nike Air Max', image: 'images/sneakers.png', link: '#' },
+      { title: 'Kitchen Mixer', image: 'images/mixer.png', link: '#' },
+      { title: 'Bluetooth Headphones', image: 'images/headphones.png', link: '#' },
+      { title: 'Designer Bag', image: 'images/designer-bag.jpg', link: '#' }
+    ];
+
+    const grid = document.getElementById('productsGrid');
+    products.forEach(prod => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${prod.image}" alt="${prod.title}" />
+        <div class="product-title">${prod.title}</div>
+        <button class="view-more" onclick="location.href='${prod.link}'">View More</button>
+      `;
+      grid.appendChild(card);
+    });
+
+    function switchTheme(theme) {
+      const hero = document.querySelector('.hero-section');
+      if (theme === 'promo') {
+        hero.style.background = 'linear-gradient(135deg, #ff6b6b, #ffa500)';
+        hero.style.color = 'white';
+      } else if (theme === 'luxury') {
+        hero.style.background = 'linear-gradient(135deg, #1a1a1a, #2c2c2c)';
+        hero.style.color = '#d4af37';
+      } else {
+        hero.style.background = 'linear-gradient(135deg, #0071ce, #00c6fb)';
+        hero.style.color = 'white';
+      }
+    }
+  </script>
+</body>
+</html>

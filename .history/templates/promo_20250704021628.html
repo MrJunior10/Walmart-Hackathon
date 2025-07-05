@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart - Subtle Mega Sale</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #f3e5f5);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    header {
+      background: #3f51b5;
+      color: white;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 2em;
+      font-weight: bold;
+      color: #ffc107;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 30px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border: 2px solid #9c27b0;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #9c27b0;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+
+    .sign-in-btn {
+      background: #ffc107;
+      color: #3f51b5;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .sale-banner {
+      background: #4db6ac;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    .urgency-timer {
+      background: #ede7f6;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 800px;
+      border-radius: 10px;
+      text-align: center;
+      color: #512da8;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #b3e5fc, #ce93d8);
+      padding: 50px 20px;
+      text-align: center;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    .hero-title {
+      font-size: 3em;
+      margin-bottom: 15px;
+      color: #3f51b5;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .cta-button {
+      background: #009688;
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2em;
+      margin: 40px 0 20px;
+      color: #512da8;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      color: #fff;
+    }
+
+    .gradient-1 { background: linear-gradient(to right, #81d4fa, #9575cd); }
+    .gradient-2 { background: linear-gradient(to right, #4db6ac, #ba68c8); }
+    .gradient-3 { background: linear-gradient(to right, #7986cb, #f48fb1); }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .product-price {
+      color: #00796b;
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #aaa;
+      font-size: 0.9em;
+      margin-right: 8px;
+    }
+
+    .discount-badge {
+      background: #ff8a65;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 15px;
+      font-size: 0.8em;
+    }
+
+    .product-btn {
+      background: #5c6bc0;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 10px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .hero-title {
+        font-size: 2.2em;
+      }
+
+      .cta-button {
+        font-size: 1em;
+        padding: 10px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sale-banner">
+    🚚 FREE Shipping on Orders $35+ | Limited Time Sale! 🛍️
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="https://www.allrecipes.com/thmb/7qoV80LeLPjEY98FSyievALqOE4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ar-new-walmart-logo-spark-blue-4x3-05716be5a80a49858b751defdd5c3705.jpg" alt="Walmart Logo" />
+        <span class="logo-text">Walmart</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search deals..." />
+        <button class="search-btn">🔍</button>
+      </div>
+      <button class="sign-in-btn">Sign In</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="urgency-timer">
+      ⏰ Sale Ends In: <span id="countdown">23:59:59</span>
+    </div>
+
+    <section class="hero-section">
+      <h1 class="hero-title">Subtle Mega Sale</h1>
+      <p class="hero-subtitle">Get the best deals with a calm, modern vibe.</p>
+      <button class="cta-button">Explore Now</button>
+    </section>
+
+    <h2 class="section-title">Featured Deals</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image gradient-1">📺</div>
+        <div class="product-info">
+          <div class="product-title">Smart TV 55"</div>
+          <div class="product-price">
+            <span class="original-price">$799</span>$499
+            <span class="discount-badge">38% OFF</span>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image gradient-2">📱</div>
+        <div class="product-info">
+          <div class="product-title">Smartphone X</div>
+          <div class="product-price">
+            <span class="original-price">$1099</span>$899
+            <span class="discount-badge">18% OFF</span>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image gradient-3">👟</div>
+        <div class="product-info">
+          <div class="product-title">Running Shoes</div>
+          <div class="product-price">
+            <span class="original-price">$149</span>$99
+            <span class="discount-badge">33% OFF</span>
+          </div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple countdown logic
+    function updateCountdown() {
+      const element = document.getElementById('countdown');
+      let [h, m, s] = element.textContent.split(':').map(Number);
+      if (--s < 0) { s = 59; if (--m < 0) { m = 59; if (--h < 0) h = 23; } }
+      element.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

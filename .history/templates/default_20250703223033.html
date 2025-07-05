@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walmart - Save Money. Live Better.</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* Header */
+    .header {
+      background: #0071ce;
+      color: white;
+      padding: 12px 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .walmart-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spark-logo {
+      width: 32px;
+      height: 32px;
+      background: #ffc220;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0071ce;
+    }
+
+    .pickup-delivery {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .location-icon {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0071ce;
+      font-size: 12px;
+    }
+
+    .search-section {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 40px;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .user-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .cart-icon {
+      position: relative;
+      width: 24px;
+      height: 24px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ffc220;
+      color: #0071ce;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-bar {
+      background: white;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 15px 0;
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .nav-item {
+      color: #2e2f32;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .nav-item:hover {
+      color: #0071ce;
+    }
+
+    .departments-btn,
+    .services-btn {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      color: #2e2f32;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 20px;
+    }
+
+    .promo-card,
+    .beauty-card,
+    .appliances-card,
+    .beauty-premium-card {
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 30px;
+      position: relative;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .promo-card:hover,
+    .bottom-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stockx-card {
+      background: linear-gradient(135deg, #1a472a, #2d5a3d);
+      color: white;
+    }
+
+    .beauty-card {
+      background: linear-gradient(135deg, #f5e6d3, #e8d5c4);
+      color: #2e2f32;
+    }
+
+    .appliances-card {
+      background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+      color: #2e2f32;
+    }
+
+    .beauty-premium-card {
+      background: linear-gradient(135deg, #f8e8f5, #f0d6eb);
+      color: #2e2f32;
+    }
+
+    .july4-section {
+      background: linear-gradient(135deg, #e8f4fd, #cce7f8);
+      border-radius: 12px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tag {
+      background: #0071ce;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .july4-section h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: #2e2f32;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    .price-highlight {
+      color: #0071ce;
+    }
+
+    .shop-btn,
+    .shop-btn-secondary {
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .shop-btn {
+      background: #0071ce;
+      color: white;
+      border: none;
+    }
+
+    .shop-btn:hover {
+      background: #005bb5;
+    }
+
+    .shop-btn-secondary {
+      background: transparent;
+      border: 2px solid #2e2f32;
+      color: #2e2f32;
+    }
+
+    .shop-btn-secondary:hover {
+      background: #2e2f32;
+      color: white;
+    }
+
+    .bottom-section {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .bottom-card {
+      border-radius: 12px;
+      padding: 25px;
+      transition: transform 0.3s;
+    }
+
+    .lunch-supplies-card {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      color: #2e2f32;
+    }
+
+    .furniture-card {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      color: #2e2f32;
+    }
+
+    .summer-trends-card {
+      background: linear-gradient(135deg, #d4a574, #c19660);
+      color: white;
+    }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .category-tab {
+      background: #e9ecef;
+      color: #004c91;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-tab.active,
+    .category-tab:hover {
+      background: #0071ce;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+
+      .bottom-section {
+        grid-template-columns: 1fr;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .search-section {
+        margin: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header and Nav -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="walmart-logo"><div class="spark-logo">✦</div></div>
+        <div class="pickup-delivery">
+          <div class="location-icon">📍</div>
+          <div>
+            <div style="font-size: 14px; font-weight: bold;">Pickup or delivery?</div>
+            <div style="font-size: 12px; opacity: 0.9;">Sacramento, 95829 • Sacramento Sup...</div>
+          </div>
+        </div>
+      </div>
+      <div class="search-section">
+        <input type="text" class="search-bar" placeholder="Search everything at Walmart online and in store">
+      </div>
+      <div class="user-section">
+        <div class="user-option"><div>🔄</div><div><div style="font-size: 14px;">Reorder</div><div style="font-size: 12px; opacity: 0.9;">My Items</div></div></div>
+        <div class="user-option"><div>👤</div><div><div style="font-size: 14px;">Sign in</div><div style="font-size: 12px; opacity: 0.9;">Account</div></div></div>
+        <div class="user-option"><div class="cart-icon">🛒<div class="cart-count">0</div></div><div style="font-size: 14px;">$0.00</div></div>
+      </div>
+    </div>
+  </header>
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <button class="departments-btn">☰ Departments</button>
+        <button class="services-btn">🛠️ Services</button>
+      </div>
+      <div class="nav-items">
+        <a href="#" class="nav-item">New Arrivals</a>
+        <a href="#" class="nav-item">Trending</a>
+        <a href="#" class="nav-item">Swim Shop</a>
+        <a href="#" class="nav-item">My Items</a>
+        <a href="#" class="nav-item">Walmart+</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Promotions -->
+  <main class="main-content">
+    <div>
+      <div class="promo-card stockx-card"><h2>Hot new arrivals</h2><button class="shop-btn">Shop now</button></div>
+      <div class="promo-card beauty-card" style="margin-top: 20px;"><h2>Hot, new beauty</h2><div class="price">from $10</div><button class="shop-btn-secondary">Shop now</button></div>
+    </div>
+    <div class="july4-section">
+      <div class="tag">Get it in as fast as an hour*</div>
+      <h1>July 4th faves<br>from <span class="price-highlight">$1.98</span></h1>
+      <button class="shop-btn">Shop now</button>
+      <div class="product-image">🎆 4th of July Items</div>
+    </div>
+    <div>
+      <div class="promo-card appliances-card"><h2>Up to 40% off</h2><div class="subtitle">home appliances</div><button class="shop-btn-secondary">Shop now</button></div>
+      <div class="promo-card beauty-premium-card" style="margin-top: 20px;"><h2>Premium beauty.</h2><div class="brand">Victoria's Secret.</div><button class="shop-btn-secondary">Shop now</button></div>
+    </div>
+  </main>
+
+  <!-- Dynamic Product Section -->
+  <section style="max-width:1200px;margin:40px auto;padding:0 20px;">
+    <h2 style="font-size:2em;margin-bottom:20px;color:#004c91;">Recommended for You</h2>
+    <div class="category-tabs">
+      <button class="category-tab active" onclick="filterProducts('all')">All</button>
+      <button class="category-tab" onclick="filterProducts('electronics')">Electronics</button>
+      <button class="category-tab" onclick="filterProducts('fashion')">Fashion</button>
+      <button class="category-tab" onclick="filterProducts('home')">Home</button>
+      <button class="category-tab" onclick="filterProducts('groceries')">Groceries</button>
+    </div>
+    <div id="products-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;"></div>
+  </section>
+
+  <!-- Footer Promo Section -->
+  <div class="bottom-section">
+    <div class="bottom-card lunch-supplies-card"><h3>Disposable lunch supplies</h3><button class="shop-btn-secondary">Shop now</button><div style="font-size: 30px;">🍽️</div></div>
+    <div class="bottom-card furniture-card"><h3>Up to 50% off</h3><button class="shop-btn-secondary">Shop now</button><div style="font-size: 30px;">🪑</div></div>
+    <div class="bottom-card summer-trends-card"><h3>Summer home trends</h3><button class="shop-btn-secondary" style="border-color:white;color:white;">Shop now</button><div style="font-size: 30px;">🌿</div></div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const products = [
+      { id:1, title:"Samsung 65\" 4K Smart TV", price:"$549.99", category:"electronics", image:"https://images-cdn.ubuy.co.in/633b2a8f039c2759ce0c8f12-samsung-43-inch-be43t-h-pro-tv.jpg" },
+      { id:2, title:"iPhone 15 Pro Max", price:"$1,199.99", category:"electronics", image:"https://www.myg.in/images/thumbnails/600/600/detailed/77/1_6vys-cw-removebg-preview__1_.png.png" },
+      { id:3, title:"Nike Air Max Sneakers", price:"$129.99", category:"fashion", image:"https://i5.walmartimages.com/dfw/4ff9c6c9-08df/k2-_4eaeed95-8101-4d61-b500-6eb928b3a70c.v1.jpg" },
+      { id:4, title:"KitchenAid Stand Mixer", price:"$299.99", category:"home", image:"https://i5.walmartimages.com/asr/8f6cf8d6-0e33-4cc7-9c6f-5eb2e645e087.9870a9cf7b60d659d1548888896a7eb5.jpeg" },
+      { id:5, title:"Organic Coffee Beans", price:"$19.99", category:"groceries", image:"https://i5.walmartimages.com/asr/5c4d91e1-4c7e-4b0b-a9e3-1e045108d50e.81eae4e9a6d4d3a48905c447b80b0cc7.jpeg" },
+    ];
+
+    let currentCategory = "all";
+
+    function renderProducts() {
+      const grid = document.getElementById("products-grid");
+      const list = currentCategory === "all" ? products : products.filter(p => p.category === currentCategory);
+      grid.innerHTML = list.map(p => `
+        <div style="background:white;border-radius:15px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);transition:0.3s;">
+          <div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;">
+            <img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:2em;color:#0071ce\\'>🛍️</div>';">
+          </div>
+          <div style="padding:15px;display:flex;flex-direction:column;">
+            <div style="font-size:1.1em;font-weight:bold;color:#004c91;">${p.title}</div>
+            <div style="font-size:1.3em;color:#0071ce;margin:10px 0;">${p.price}</div>
+            <button style="margin-top:auto;background:#0071ce;color:white;border:none;border-radius:20px;padding:10px;font-weight:bold;cursor:pointer;">Add to Cart</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterProducts(cat) {
+      currentCategory = cat;
+      document.querySelectorAll(".category-tab").forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+      renderProducts();
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>

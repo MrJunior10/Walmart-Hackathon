@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart - Save Money. Live Better.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+        }
+
+        /* Header Styles */
+        header {
+            background: #004c91;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffc220;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffc220;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sign-in-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .sign-in-btn:hover {
+            background: white;
+            color: #004c91;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #0071ce, #004c91);
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-content {
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: #ffc220;
+            color: #004c91;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Product Sections */
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #004c91;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Product image styles */
+        .product-image {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #004c91;
+        }
+
+        .product-price {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0071ce;
+        }
+
+        .product-btn {
+            background: #0071ce;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-2px);
+            background: #004c91;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            background: #e9ecef;
+            color: #004c91;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab.active {
+            background: #0071ce;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .category-tab:hover {
+            background: #0071ce;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 2em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://www.allrecipes.com/thmb/7qoV80LeLPjEY98FSyievALqOE4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ar-new-walmart-logo-spark-blue-4x3-05716be5a80a49858b751defdd5c3705.jpg" alt="Walmart Logo">
+                <span class="logo-text">Walmart</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search everything at Walmart online and in store">
+                <button class="search-btn">🔍</button>
+            </div>
+            <button class="sign-in-btn">Sign In</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Save Money. Live Better.</h1>
+                <p class="hero-subtitle">Discover amazing deals on everything you need</p>
+                <button class="cta-button">Shop Now</button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Recommended for You</h2>
+            
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterProducts('all')">All</button>
+                <button class="category-tab" onclick="filterProducts('electronics')">Electronics</button>
+                <button class="category-tab" onclick="filterProducts('home')">Home & Garden</button>
+                <button class="category-tab" onclick="filterProducts('fashion')">Fashion</button>
+                <button class="category-tab" onclick="filterProducts('groceries')">Groceries</button>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be generated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                title: "Samsung 65\" 4K Smart TV",
+                price: "$549.99",
+                category: "electronics",
+                image: "https://i5.walmartimages.com/seo/Samsung-65-Class-4K-UHD-2160P-LED-Smart-TV-with-HDR-UN65TU7000_b5c2b9e9-9ca2-4f15-9f5c-b1b5c5f5d5a5.jpg"
+            },
+            {
+                id: 2,
+                title: "iPhone 15 Pro Max",
+                price: "$1,199.99",
+                category: "electronics",
+                image: "https://i5.walmartimages.com/seo/Apple-iPhone-15-Pro-Max-128GB-Natural-Titanium-Verizon_8f3c2f1e-8b8f-4e5d-9f6e-7f8f9e0f1e2f.jpg"
+            },
+            {
+                id: 3,
+                title: "Nike Air Max Sneakers",
+                price: "$129.99",
+                category: "fashion",
+                image: "https://i5.walmartimages.com/seo/Nike-Air-Max-SC-Men-s-Shoes-White-Black-CW4555-100_7c8d9e0f-1e2f-3f4e-5f6e-7f8f9e0f1e2f.jpg"
+            },
+            {
+                id: 4,
+                title: "KitchenAid Stand Mixer",
+                price: "$299.99",
+                category: "home",
+                image: "https://i5.walmartimages.com/seo/KitchenAid-Classic-Series-4-5-Quart-Tilt-Head-Stand-Mixer-K45SS_c3a4b5c6-d7e8-f9g0-h1i2-j3k4l5m6n7o8.jpg"
+            },
+            {
+                id: 5,
+                title: "Organic Coffee Beans",
+                price: "$19.99",
+                category: "groceries",
+                image: "https://i5.walmartimages.com/seo/Great-Value-Organic-Coffee-Beans-Dark-Roast-12-oz_a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6.jpg"
+            },
+            {
+                id: 6,
+                title: "Wireless Bluetooth Headphones",
+                price: "$89.99",
+                category: "electronics",
+                image: "https://i5.walmartimages.com/seo/Sony-WH-CH720N-Wireless-Noise-Canceling-Headphones-Black_b2c3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7.jpg"
+            },
+            {
+                id: 7,
+                title: "Designer Handbag",
+                price: "$249.99",
+                category: "fashion",
+                image: "https://i5.walmartimages.com/seo/Coach-Outlet-Crossbody-Bag-Signature-Canvas-Leather-Handbag-Purse_d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9.jpg"
+            },
+            {
+                id: 8,
+                title: "Garden Tool Set",
+                price: "$79.99",
+                category: "home",
+                image: "https://i5.walmartimages.com/seo/Fiskars-7-Piece-Garden-Tool-Set-with-Tote-Bag-384190-1001_e5f6g7h8-i9j0-k1l2-m3n4-o5p6q7r8s9t0.jpg"
+            }
+        ];
+
+        let currentCategory = 'all';
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const filteredProducts = currentCategory === 'all' 
+                ? products 
+                : products.filter(product => product.category === currentCategory);
+
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.title}" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; this.parentElement.innerHTML='<div style=\"font-size: 3em; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\">🛍️</div>';">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-price">${product.price}</p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            currentCategory = category;
+            
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderProducts();
+        }
+
+        // Initialize the page
+        renderProducts();
+    </script>
+</body>
+</html>

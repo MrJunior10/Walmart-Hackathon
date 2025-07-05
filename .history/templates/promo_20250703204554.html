@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart - 🔥 MEGA SALE EVENT!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            animation: promoGlow 3s ease-in-out infinite alternate;
+            min-height: 100vh;
+        }
+
+        @keyframes promoGlow {
+            0% { background: linear-gradient(45deg, #ff6b6b, #ffa500); }
+            100% { background: linear-gradient(45deg, #ff4757, #ff6348); }
+        }
+
+        /* Header */
+        header {
+            background: #dc3545;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffc220;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: 3px solid #ffc220;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 194, 32, 0.5);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffc220;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: buttonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        .sign-in-btn {
+            background: #ffc220;
+            color: #dc3545;
+            border: 3px solid #ffc220;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .sign-in-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Sale Banner */
+        .sale-banner {
+            background: linear-gradient(45deg, #ff4757, #ff6348);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            animation: flashBanner 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes flashBanner {
+            0% { background: linear-gradient(45deg, #ff4757, #ff6348); }
+            100% { background: linear-gradient(45deg, #ff6348, #ff4757); }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #ff4757, #ff6348);
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            animation: flashy 2s ease-in-out infinite alternate;
+            border: 3px solid #ffc220;
+        }
+
+        @keyframes flashy {
+            0% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 71, 87, 0.8); }
+        }
+
+        .hero-content {
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 3px 3px 6px rgba(0,0,0,0.3); }
+            100% { text-shadow: 3px 3px 6px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.5); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            animation: subtitlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes subtitlePulse {
+            0%, 100% { opacity: 0.95; }
+            50% { opacity: 1; }
+        }
+
+        .cta-button {
+            background: #ffc220;
+            color: #dc3545;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: ctaBounce 1s ease-in-out infinite alternate;
+            box-shadow: 0 8px 25px rgba(255, 194, 32, 0.4);
+        }
+
+        @keyframes ctaBounce {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(255, 194, 32, 0.6);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: titleBounce 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleBounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border: 3px solid #ff4757;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+            animation: cardFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 71, 87, 0.5);
+        }
+
+        .product-card::before {
+            content: "🔥 HOT DEAL";
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #ff4757;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            z-index: 10;
+            animation: badgeGlow 2s ease-in-out infinite alternate;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        }
+
+        @keyframes badgeGlow {
+            0% { box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4); }
+            100% { box-shadow: 0 4px 15px rgba(255, 71, 87, 0.8); }
+        }
+
+        /* Fixed product image container */
+        .product-image {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Gradient backgrounds for products without images */
+        .product-image.gradient-1 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .product-image.gradient-2 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .product-image.gradient-3 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .product-image.gradient-4 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .product-image.gradient-5 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        /* Product icons for gradient backgrounds */
+        .product-icon {
+            font-size: 4em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: iconFloat 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes iconFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-8px); }
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff4757;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .original-price {
+            font-size: 0.8em;
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+        }
+
+        .discount-badge {
+            background: #ff4757;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #ff4757, #ff6348);
+            color: white;
+            animation: buttonGlow 1.5s ease-in-out infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes buttonGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+        }
+
+        .product-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.6);
+        }
+
+        /* Urgency Timer */
+        .urgency-timer {
+            background: linear-gradient(45deg, #ff4757, #ff6348);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: timerPulse 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes timerPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        .timer-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timer-display {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffc220;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 2.5em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card::before {
+                top: -10px;
+                right: -10px;
+                font-size: 0.8em;
+                padding: 5px 15px;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sale-banner">
+        ⚡ LIMITED TIME: UP TO 70% OFF EVERYTHING! ⚡ FREE SHIPPING ON ORDERS $35+
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://www.allrecipes.com/thmb/7qoV80LeLPjEY98FSyievALqOE4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ar-new-walmart-logo-spark-blue-4x3-05716be5a80a49858b751defdd5c3705.jpg" alt="Walmart Logo">
+                <span class="logo-text">Walmart</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search hot deals and discounts...">
+                <button class="search-btn">🔍</button>
+            </div>
+            <button class="sign-in-btn">Sign In</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="urgency-timer">
+            <div class="timer-text">⏰ SALE ENDS IN:</div>
+            <div class="timer-display" id="countdown">23:59:42</div>
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">🔥 MEGA SALE EVENT!</h1>
+                <p class="hero-subtitle">Up to 70% OFF! Limited time only - Don't miss out!</p>
+                <button class="cta-button">Shop Now & Save!</button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">🔥 Hot Deals & Steals</h2>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="product-icon">📺</div>
+                    </div>
+                    <div class="product-info">
+                      <img src="https://5.imimg.com/data5/FK/DT/BI/SELLER-81092709/65-inch-samsung-smart-led-tv-1000x1000.jpg" alt="TV">
+                        <h3 class="product-title">Samsung 65" 4K Smart TV</h3>
+                        <p class="product-price">
+                            <span class="original-price">$899.99</span>
+                            $549.99
+                            <span class="discount-badge">39% OFF</span>
+                        </p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image gradient-1">
+                        <div class="product-icon">📱</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 15 Pro Max</h3>
+                        <p class="product-price">
+                            <span class="original-price">$1,399.99</span>
+                            $1,199.99
+                            <span class="discount-badge">14% OFF</span>
+                        </p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image gradient-2">
+                        <div class="product-icon">👟</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Nike Air Max Sneakers</h3>
+                        <p class="product-price">
+                            <span class="original-price">$179.99</span>
+                            $129.99
+                            <span class="discount-badge">28% OFF</span>
+                        </p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image gradient-3">
+                        <div class="product-icon">🥄</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">KitchenAid Stand Mixer</h3>
+                        <p class="product-price">
+                            <span class="original-price">$449.99</span>
+                            $299.99
+                            <span class="discount-badge">33% OFF</span>
+                        </p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image gradient-4">
+                        <div class="product-icon">🎧</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Wireless Bluetooth Headphones</h3>
+                        <p class="product-price">
+                            <span class="original-price">$149.99</span>
+                            $89.99
+                            <span class="discount-badge">40% OFF</span>
+                        </p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image gradient-5">
+                        <div class="product-icon">👜</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Designer Handbag</h3>
+                        <p class="product-price">
+                            <span class="original-price">$349.99</span>
+                            $249.99
+                            <span class="discount-badge">29% OFF</span>
+                        </p>
+                        <button class="product-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            let [hours, minutes, seconds] = countdownElement.textContent.split(':').map(Number);
+            
+            seconds--;
+            if (seconds < 0) {
+                seconds = 59;
+                minutes--;
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                    if (hours < 0) {
+                        hours = 23;
+                    }
+                }
+            }
+            
+            countdownElement.textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Add click effects to buttons
+        document.querySelectorAll('.product-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
