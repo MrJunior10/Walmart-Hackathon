@@ -3,192 +3,826 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Walmart – Promo</title>
-  <!-- (Same <style> block as default.html) -->
+  <title>Walmart Mega Sale - Up to 70% Off</title>
   <style>
-    /* Page‐wrapper for fade transitions */
-    .page-container {
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.6s ease-in-out;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
     }
-    .page-container.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    .page-container.exit {
-      opacity: 0;
-    }
-
-    /* ==== Global Styles ==== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-      background: #f6f8fa;
-      color: #222;
-      min-height: 100vh;
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333; 
+      line-height: 1.6; 
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* ==== Header ==== */
+    /* Animated Background Elements */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .shape {
+      position: absolute;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border-radius: 50%;
+      animation: float 8s infinite ease-in-out;
+    }
+
+    .shape:nth-child(1) { width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s; }
+    .shape:nth-child(2) { width: 150px; height: 150px; top: 60%; left: 80%; animation-delay: 2s; }
+    .shape:nth-child(3) { width: 80px; height: 80px; top: 80%; left: 20%; animation-delay: 4s; }
+    .shape:nth-child(4) { width: 120px; height: 120px; top: 40%; left: 70%; animation-delay: 6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
     header {
-      position: relative; padding: 16px 0; overflow: hidden;
+      background: linear-gradient(135deg, #0071ce 0%, #005bb5 100%);
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 100;
     }
-    .header-gradient {
-      position: absolute; top: 0; left: 0; right: 0; height: 100%;
-      background: linear-gradient(270deg, #0071ce, #00c6fb, #ffd600, #0071ce);
-      background-size: 600% 600%;
-      animation: gradientMove 10s ease-in-out infinite;
-      opacity: 0.18; pointer-events:none; z-index:0;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+
     .header-content {
-      position: relative; z-index: 1;
-      max-width: 900px; margin: auto;
-      display: flex; align-items: center; gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 20px;
     }
-    .logo { font-size: 1.7em; color: #0071ce; font-weight:700; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      height: 45px;
+      width: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .logo span {
+      font-size: 2.5em;
+      font-weight: 900;
+      color: #ffc220;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #ffc220, #ffdd44);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .search-bar {
-      flex: 1; padding: 10px; border-radius: 12px; border:none;
-      box-shadow: 0 2px 8px rgba(0,113,206,0.06);
-    }
-    .sign-in {
-      padding: 8px 20px; border:none; border-radius:8px;
-      background: linear-gradient(90deg,#0071ce 60%,#00c6fb 100%);
-      color: #fff; cursor:pointer;
+      flex: 1;
+      position: relative;
     }
 
-    /* ==== Banner ==== */
-    .banner {
-      position: relative; padding: 32px 0 16px;
-    }
-    .banner-gradient {
-      position:absolute; top:0; left:0; right:0; bottom:0;
-      background: linear-gradient(120deg,#7ed6fb 60%,#fff 100%,#ffd600 120%);
-      background-size:200% 200%; animation: gradientMove 12s ease-in-out infinite;
-      opacity:0.22; pointer-events:none; z-index:0;
-    }
-    .banner-content {
-      position:relative; z-index:1;
-      max-width:900px; margin:auto; display:flex; align-items:center; gap:1rem;
-    }
-    .banner-content h1 {
-      font-size:2.7em; color:#0071ce; font-weight:700;
-    }
-    .banner-content img {
-      width:180px; border-radius:16px; box-shadow:0 4px 24px rgba(0,113,206,0.10);
+    .search-bar input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      outline: none;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
 
-    /* ==== Recommended Grid ==== */
-    .recommended { max-width:900px; margin:32px auto; padding:0 16px; }
-    .recommended h2 {
-      font-size:1.7em; color:#0071ce; margin-bottom:16px; font-weight:700;
+    .search-bar input:focus { 
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(255, 194, 32, 0.3);
     }
-    .product-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:24px;
+
+    .search-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(45deg, #ffc220, #ffdd44);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 194, 32, 0.4);
     }
+
+    .search-btn:hover { 
+      transform: translateY(-50%) scale(1.1) rotate(360deg);
+      box-shadow: 0 8px 25px rgba(255, 194, 32, 0.6);
+    }
+
+    .sign-in-btn {
+      background: linear-gradient(45deg, #ffc220, #ffdd44);
+      color: #0071ce;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 194, 32, 0.4);
+    }
+
+    .sign-in-btn:hover { 
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 194, 32, 0.6);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px 40px;
+      position: relative;
+    }
+
+    .flash-banner {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      color: white;
+      padding: 16px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 700;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(231, 76, 60, 0.4);
+      animation: pulse 2s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flash-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+    }
+
+    .hero-section {
+      margin-bottom: 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1));
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .hero-content {
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-title { 
+      font-size: 4em; 
+      font-weight: 900; 
+      margin-bottom: 20px; 
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #ffffff, #f0f8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-subtitle { 
+      font-size: 1.4em; 
+      margin-bottom: 30px; 
+      opacity: 0.95;
+      animation: subtitleSlide 2s ease-out;
+    }
+
+    @keyframes subtitleSlide {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 0.95; transform: translateY(0); }
+    }
+
+    .cta-button {
+      background: linear-gradient(45deg, #ffc220, #ffdd44);
+      color: #333;
+      padding: 20px 50px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3em;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 30px rgba(255, 194, 32, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover { 
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(255, 194, 32, 0.7);
+    }
+
+    .countdown-section {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(231, 76, 60, 0.3);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 50px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    .countdown-title {
+      font-size: 2.2em;
+      margin-bottom: 30px;
+      color: #e74c3c;
+      font-weight: 800;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      perspective: 1000px;
+    }
+
+    .time-unit {
+      background: linear-gradient(145deg, #e74c3c, #c0392b);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      min-width: 100px;
+      box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .time-unit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+      pointer-events: none;
+    }
+
+    .time-unit:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(231, 76, 60, 0.6);
+    }
+
+    .time-value {
+      font-size: 2.8em;
+      font-weight: 900;
+      display: block;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .time-label {
+      font-size: 0.9em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 2.8em;
+      margin-bottom: 40px;
+      text-align: center;
+      font-weight: 900;
+      color: #333;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      background: linear-gradient(45deg, #333, #555);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 2px 2px 8px rgba(0,0,0,0.1); }
+      50% { text-shadow: 2px 2px 15px rgba(0,0,0,0.2); }
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      perspective: 1000px;
+    }
+
     .product-card {
-      background:rgba(255,255,255,0.55); border-radius:24px; padding:24px 16px 20px;
-      text-align:center; box-shadow:0 8px 32px rgba(0,113,206,0.10),0 2px 8px rgba(0,0,0,0.04);
-      transition:transform .3s,box-shadow .3s,background .3s;
-      position:relative; overflow:hidden; backdrop-filter:blur(8px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      animation: cardFloat 4s ease-in-out infinite;
     }
-    .product-card:hover {
-      transform:translateY(-12px) scale(1.04) rotateY(6deg);
-      box-shadow:0 16px 48px rgba(0,113,206,0.18),0 2px 8px rgba(0,0,0,0.10);
-      background:rgba(255,255,255,0.75);
-    }
-    .product-card img {
-      width:100px; height:100px; object-fit:contain;
-      margin-bottom:12px;
-      animation: floatImg 3s ease-in-out infinite alternate;
-    }
-    @keyframes floatImg { from {transform:translateY(0);} to {transform:translateY(-12px);} }
-    .product-title { font-weight:700; margin-bottom:8px; }
-    .view-more {
-      background:linear-gradient(90deg,#2196f3 0%,#00c6fb 100%);
-      color:#fff; padding:10px 24px; border:none; border-radius:8px;
-      cursor:pointer; font-weight:700; margin-top:8px;
-      transition:background .2s,transform .2s;
-    }
-    .view-more:hover { transform:scale(1.05); }
 
-    /* ==== Responsive ==== */
-    @media(max-width:600px){
-      .banner-content, .header-content{ flex-direction:column; gap:.5rem; }
-      .product-grid{ grid-template-columns:1fr; }
+    .product-card:nth-child(even) {
+      animation-delay: 2s;
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .product-card::before {
+      content: "Sale";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(45deg, #e74c3c, #c0392b);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.9em;
+      font-weight: 700;
+      z-index: 20;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+      animation: saleFlash 2s infinite;
+    }
+
+    @keyframes saleFlash {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .product-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.1) rotate(2deg);
+    }
+
+    .product-info { 
+      padding: 30px; 
+      position: relative;
+    }
+
+    .product-title {
+      font-size: 1.4em;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      font-weight: 900;
+      color: #e74c3c;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .product-old-price {
+      font-size: 1.2em;
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    .discount-badge {
+      background: linear-gradient(45deg, #27ae60, #2ecc71);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+      animation: badgePulse 2s infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .product-btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(45deg, #0071ce, #005bb5);
+      color: white;
+      font-size: 1.1em;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(0, 113, 206, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .product-btn:hover::before {
+      left: 100%;
+    }
+
+    .product-btn:hover { 
+      background: linear-gradient(45deg, #005bb5, #004494);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(0, 113, 206, 0.5);
+    }
+
+    .product-btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    /* Particle Animation */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: particleFloat 6s infinite ease-in-out;
+    }
+
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .products-grid { 
+        grid-template-columns: 1fr; 
+        gap: 30px;
+      }
+      .countdown-timer { 
+        flex-direction: column; 
+        align-items: center; 
+      }
+      .time-unit { 
+        min-width: 120px; 
+      }
+      .hero-title { 
+        font-size: 2.5em; 
+      }
+      .section-title { 
+        font-size: 2.2em; 
+      }
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .search-bar {
+        order: 2;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content { 
+        padding: 60px 20px; 
+      }
+      .hero-title { 
+        font-size: 2em; 
+      }
+      .countdown-section { 
+        padding: 25px; 
+      }
+      .products-grid { 
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="page" class="page-container">
-    <header>
-      <div class="header-gradient"></div>
-      <div class="header-content">
-        <div class="logo">Walmart</div>
-        <input class="search-bar" type="text" placeholder="Search" />
-        <button class="sign-in">Sign in</button>
-      </div>
-    </header>
-
-    <section class="banner">
-      <div class="banner-gradient"></div>
-      <div class="banner-content">
-        <h1>Promo</h1>
-        <img src="images/promo.jpg" alt="Promo Banner" />
-      </div>
-    </section>
-
-    <section class="recommended">
-      <h2>Recommended for You</h2>
-      <div class="product-grid">
-        <!-- Six sample “promo” items -->
-        <div class="product-card">
-          <img src="images/promo.jpg" alt="Promo Item 1" />
-          <div class="product-title">Promo Item 1</div>
-          <button class="view-more">View more</button>
-        </div>
-        <div class="product-card">
-          <img src="images/promo.jpg" alt="Promo Item 2" />
-          <div class="product-title">Promo Item 2</div>
-          <button class="view-more">View more</button>
-        </div>
-        <div class="product-card">
-          <img src="images/promo.jpg" alt="Promo Item 3" />
-          <div class="product-title">Promo Item 3</div>
-          <button class="view-more">View more</button>
-        </div>
-        <div class="product-card">
-          <img src="images/promo.jpg" alt="Promo Item 4" />
-          <div class="product-title">Promo Item 4</div>
-          <button class="view-more">View more</button>
-        </div>
-        <div class="product-card">
-          <img src="images/promo.jpg" alt="Promo Item 5" />
-          <div class="product-title">Promo Item 5</div>
-          <button class="view-more">View more</button>
-        </div>
-        <div class="product-card">
-          <img src="images/promo.jpg" alt="Promo Item 6" />
-          <div class="product-title">Promo Item 6</div>
-          <button class="view-more">View more</button>
-        </div>
-      </div>
-    </section>
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
   </div>
 
+  <div class="particles" id="particles"></div>
+
+  <header>
+    <div class="header-content">
+      <a href="#" class="logo">
+        <img src="https://www.allrecipes.com/thmb/7qoV80LeLPjEY98FSyievALqOE4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ar-new-walmart-logo-spark-blue-4x3-05716be5a80a49858b751defdd5c3705.jpg" alt="Walmart Logo">
+        <span>Walmart</span>
+      </a>
+      <div class="search-bar">
+        <input type="text" placeholder="Search products...">
+        <button class="search-btn">🔍</button>
+      </div>
+      <button class="sign-in-btn">Sign In</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="flash-banner">⚡ Limited Time: Extra 20% OFF code SAVE20 ⚡</div>
+
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Mega Sale Event</h1>
+        <p class="hero-subtitle">Save up to 70% on top brands & essentials</p>
+        <button class="cta-button">Shop Now</button>
+      </div>
+    </section>
+
+    <section class="countdown-section">
+      <h2 class="countdown-title">Sale Ends In:</h2>
+      <div class="countdown-timer">
+        <div class="time-unit"><span class="time-value">02</span><span class="time-label">Days</span></div>
+        <div class="time-unit"><span class="time-value">14</span><span class="time-label">Hours</span></div>
+        <div class="time-unit"><span class="time-value">37</span><span class="time-label">Minutes</span></div>
+        <div class="time-unit"><span class="time-value">22</span><span class="time-label">Seconds</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Featured Deals</h2>
+      <div class="products-grid">
+        <!-- Product 1: TV -->
+        <div class="product-card">
+          <div class="product-image"><img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/01a88341-14d6-4e6c-99c9-9e4aa462ae1c.jpg;maxHeight=828;maxWidth=400?format=webp" alt="Gaming Console Bundle"></div>
+          <div class="product-info">
+            <h3 class="product-title">Gaming Console Bundle</h3>
+            <div class="price-container"><span class="product-price">$399.99</span><span class="product-old-price">$599.99</span><span class="discount-badge">33% OFF</span></div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+        </div>
+        <!-- Product 2: Mixer -->
+        <div class="product-card">
+          <div class="product-image"><img src="https://www.kitchenaid.in/content/kitchenaid/en_in/countertop-appliances/stand-mixers/see-all/_jcr_content/root/main/parsys-bottom/responsivegrid_340956052/container_copy/wrapperParsys/responsivegrid/image.coreimg.jpeg/1587038508404/stand-mixer.jpeg" alt="KitchenAid Pro Mixer"></div>
+          <div class="product-info">
+            <h3 class="product-title">KitchenAid Pro Mixer</h3>
+            <div class="price-container"><span class="product-price">$249.99</span><span class="product-old-price">$449.99</span><span class="discount-badge">44% OFF</span></div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+        </div>
+        <!-- Product 3: Headphones -->
+        <div class="product-card">
+          <div class="product-image"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25008886/DSCF3709.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Premium Wireless Headphones"></div>
+          <div class="product-info">
+            <h3 class="product-title">Premium Wireless Headphones</h3>
+            <div class="price-container"><span class="product-price">$79.99</span><span class="product-old-price">$199.99</span><span class="discount-badge">60% OFF</span></div>
+            <button class="product-btn add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <!-- Product 4: Nike -->
+        <div class="product-card">
+          <div class="product-image"><img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/47b7945e-a379-4c24-b9df-98f4eef178e5/NIKE+AIR+MAX+PLUS.png" alt="Nike Air Max Collection"></div>
+          <div class="product-info">
+            <h3 class="product-title">Nike Air Max Collection</h3>
+            <div class="price-container"><span class="product-price">$89.99</span><span class="product-old-price">$179.99</span><span class="discount-badge">50% OFF</span></div>
+            <button class="product-btn add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <!-- Product 5: TV -->
+        <div class="product-card">
+          <div class="product-image"><img src="https://images-cdn.ubuy.co.in/633b2a8f039c2759ce0c8f12-samsung-43-inch-be43t-h-pro-tv.jpg" alt="Samsung 65" 4K Smart TV"></div>
+          <div class="product-info">
+            <h3 class="product-title">Samsung 65" 4K Smart TV</h3>
+            <div class="price-container"><span class="product-price">$549.99</span><span class="product-old-price">$899.99</span><span class="discount-badge">39% OFF</span></div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+        </div>
+        <!-- Product 6: iPhone -->
+        <div class="product-card">
+          <div class="product-image"><img src="https://fdn.gsmarena.com/imgroot/news/23/09/apple-iphone-15-pro-what-to-expect/-822/gsmarena_001.jpg" alt="iPhone 15 Pro Max"></div>
+          <div class="product-info">
+            <h3 class="product-title">iPhone 15 Pro Max</h3>
+            <div class="price-container"><span class="product-price">$999.99</span><span class="product-old-price">$1,399.99</span><span class="discount-badge">29% OFF</span></div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <script>
-    document.addEventListener('DOMContentLoaded', ()=>document.getElementById('page').classList.add('visible'));
-    document.querySelectorAll('a, .view-more, .sign-in').forEach(el => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        const href = el.getAttribute('href')||'#';
-        document.getElementById('page').classList.add('exit');
-        setTimeout(()=>window.location=href,600);
+    // Countdown Timer
+    function updateCountdown() {
+      const vals = Array.from(document.querySelectorAll('.time-value')).map(el => parseInt(el.textContent));
+      vals[3]--;
+      if (vals[3] < 0) { vals[3] = 59; vals[2]--; if (vals[2] < 0) { vals[2] = 59; vals[1]--; if (vals[1] < 0) { vals[1] = 23; vals[0]--; if (vals[0] < 0) vals[0] = 0; } } }
+      document.querySelectorAll('.time-value').forEach((el, i) => el.textContent = String(vals[i]).padStart(2, '0'));
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Product Button Interactions
+    document.querySelectorAll('.product-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => btn.style.transform = '', 150);
+      });
+    });
+
+    // Particle System
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+    createParticles();
+
+    // 3D Mouse Tracking for Cards (simplified to just scale and translate)
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // Simplified effect - just slight movement without rotation
+        const moveX = (x - centerX) / 20;
+        const moveY = (y - centerY) / 20;
+        
+        card.style.transform = `translateX(${moveX}px) translateY(${moveY - 15}px) scale(1.02)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0px) scale(1)';
+      });
+    });
+
+    // Parallax Effect for Background Shapes
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const shapes = document.querySelectorAll('.shape');
+      shapes.forEach((shape, index) => {
+        const speed = 0.5 + (index * 0.1);
+        shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+      });
+    });
+
+    // Enhanced Button Hover Effects
+    document.querySelectorAll('.cta-button, .sign-in-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transform = btn.style.transform.replace('scale(1)', 'scale(1.05)');
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = btn.style.transform.replace('scale(1.05)', 'scale(1)');
+      });
+    });
+
+    // Smooth Scroll for CTA Button
+    document.querySelector('.cta-button').addEventListener('click', () => {
+      document.querySelector('.products-grid').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
       });
     });
   </script>
